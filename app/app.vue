@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <<NuxtPage/>
+  <Header/>
+  <NuxtPage/>
+  <Footer/>
 </template>
