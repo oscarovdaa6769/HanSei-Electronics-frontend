@@ -31,7 +31,7 @@
       </div>
 
     <a href="http://localhost:3000/login" 
-   class="w-full bg-sky-600 text-white font-semibold py-3 rounded-lg hover:bg-sky-800 transition shadow-sm active:scale-[100]">
+   class="block text-center w-full bg-sky-600 text-white font-semibold py-3 rounded-lg hover:bg-sky-800 transition shadow-md active:scale-95">
    Log in
 </a>
       <p class="text-center text-slate-600 text-sm mt-6">
