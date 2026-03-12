@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #2563EB;  /*(Bright Blue)  Buttons, headers, important elements*/
+  --color-secondary: #1E40AF;  /*(Dark Blue)  Sidebar, footer*/
+  --color-accent: #1d50bf;  /*(Accent Blue)  Hover*/
+  --color-background: #F3F4F6;  /*(Light Gray)  Page background*/
+  --color-text: #1F2937;  /*(Dark Gray)  Main text*/
+  --color-success: #10B981;  /*(Green)  Check-in, Approve buttons*/
+  --color-warning: #F59E0B;  /*(Orange)  Overtime, Pending status*/
+  --color-danger: #EF4444;  /*(Red)  Check-out, Reject buttons*/
+  --color-border: #E5E7EB;  /*(Gray)  Input fields, dividers, cards*/
+
+/* Font families */
+  --font-heading: 'Epilogue', sans-serif;
+  --font-body: 'Epilogue', sans-serif;
+}
+
+.container {
+  width: 1280px;
+  margin: 0 auto;
+}
