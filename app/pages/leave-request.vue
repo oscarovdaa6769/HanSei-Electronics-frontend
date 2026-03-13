@@ -1,95 +1,41 @@
 <script setup lang="ts">
 import secondBtn from '/components/secondBtn.vue'
 import thirdBtn from '/components/thirdBtn.vue'
-import card from '/components/card.vue'
-import { ref, computed } from 'vue'
-
-const isOpen = ref(false)
-const selected = ref('All Departments')
-
-const departments = [
-  "All Departments",
-  "Human Resource",
-  "IT",
-  "Finance",
-  "Marketing"
-]
-
-function selectDepartment(dep) {
-  selected.value = dep
-  isOpen.value = false
-}
-
-const showCalendar = ref(false)
-const selectedDate = ref('Select Date')
-
-const today = new Date()
-const month = ref(today.getMonth())
-const year = ref(today.getFullYear())
-
-const months = [
-  "January","February","March","April",
-  "May","June","July","August",
-  "September","October","November","December"
-]
-
-const weekDays = [
-  "Sun","Mon","Tue","Wed","Thu","Fri","Sat"
-]
-
-const daysInMonth = computed(() => {
-  return new Date(year.value, month.value + 1, 0).getDate()
-})
-
-const firstDay = computed(() => {
-  return new Date(year.value, month.value, 1).getDay()
-})
-
-const days = computed(() => {
-  return Array.from({ length: daysInMonth.value }, (_, i) => i + 1)
-})
-
-function nextMonth() {
-  if (month.value === 11) {
-    month.value = 0
-    year.value++
-  } else {
-    month.value++
-  }
-}
-
-function prevMonth() {
-  if (month.value === 0) {
-    month.value = 11
-    year.value--
-  } else {
-    month.value--
-  }
-}
-
-function selectDate(day) {
-  selectedDate.value = `${year.value}-${month.value + 1}-${day}`
-  showCalendar.value = false
-}
 </script>
 
 <template>
   <div class="p-10 w-full flex flex-col gap-9">
     <div class="flex justify-between items-center">
-      <div class="flex flex-col gap-3">
-        <h1 class="text-4xl font-black uppercase">Attendance</h1>
-        <span class="text-gray-400">Welcome back, Minho! Here's what's happening today.</span>
+      <div class="flex flex-col gap-3 w-full">
+        <h1 class="text-4xl font-black uppercase">Leave Request</h1>
+        <span class="text-gray-400">Manage and track employee time-off requests</span>
       </div>
-      <secondBtn label="Export" icon="solar:export-bold"/>
+      <div class="flex items-center gap-3 w-full">
+        <form class="relative w-full max-w-sm">
+          <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
+          <input type="text" placeholder="Search employee..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
+        </form>
+        <secondBtn label="New Request" icon="solar:add-circle-bold"/>
+        <Icon name="solar:bell-bold" size="20" class="relative"/>
+        <div class="w-5 h-5 rounded-full bg-danger flex items-center justify-center text-light absolute right-7 top-15 text-sm">5</div>
+      </div>
     </div>
     <div class="">
       <div class="grid grid-cols-4 gap-6">
-        <card label="Total Employee" icon="solar:users-group-rounded-bold" :amount="156" iicon="solar:arrow-up-linear" message="+12 this month" note="text-success" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
-        <card label="Present Today" icon="solar:user-check-bold" :amount="142" iicon="solar:arrow-up-linear" message="+91% attendance" note="text-success" color="bg-green-500/20 backdrop-blur-md text-success"/>
-        <card label="On Leave" icon="solar:calendar-mark-bold" :amount="8" iicon="" message="4 pending requests" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
-        <card label="Late Today" icon="solar:clock-circle-bold" :amount="6" iicon="solar:arrow-down-linear" message="-2 from yesterday" note="text-danger" color="bg-red-500/20 backdrop-blue-md text-danger"/>
+        <card label="Employees on Leave" icon="solar:users-group-rounded-bold" :amount="8" iicon="" message="Currently away" note="text-gray-400" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
+        <card label="Approved This Month" icon="solar:check-circle-bold" :amount="24" iicon="" message="+8 from last month" note="text-gray-400" color="bg-green-500/20 backdrop-blur-md text-success"/>
+        <card label="Pending Request" icon="solar:clock-circle-bold" :amount="12" iicon="" message="Waiting for approval" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
+        <card label="Rejected" icon="solar:close-circle-bold" :amount="3" iicon="" message="This month" note="text-gray-400" color="bg-red-500/20 backdrop-blue-md text-danger"/>
       </div>
     </div>
+  </div>
+  <div class="p-10"></div>
+  <div class="flex items-center gap-3">
+    <thirdBtn label="All Requests"/>
+    <thirdBtn label="Pending"/>
+    <thirdBtn label="Approved"/>
+    <thirdBtn label="Rejected"/>
+    <thirdBtn label="My Requests"/>
   </div>
   <div class="p-10 pt-0 w-full flex flex-col">
     <div class="border border-line rounded-lg overflow-hidden">
@@ -104,7 +50,7 @@ function selectDate(day) {
               {{ selected }} <Icon name="solar:alt-arrow-down-bold" size="20"/>
             </button>
             <div class="absolute mt-2 w-full bg-light border-line border rounded-lg shadow-lg overflow-hidden z-1000" v-if="isOpen">
-              <div class="px-4 py-2 hover:bg-primary hover:text-light cursor-pointer" v-for="dep in departments" :key="dep" @click="selectDepartment(dep)">{{ dep }}</div>
+              <div class="px-4 py-2 hover:bg-primary hover:text-light cursor-pointer" v-for="type in types" :key="type" @click="selectType(type)">{{ type }}</div>
             </div>
           </div>
           <div class="relative">

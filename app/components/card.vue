@@ -18,10 +18,12 @@ const props = defineProps({
         <Icon :name="props.icon"/>
       </div>
     </div>
-    <h1 class="text-5xl font-black">{{ amount }}</h1>
-    <div :class="['flex items-center', note]">
-      <Icon :name="props.iicon" size="20"/>
-      <span class="mt-1">{{ message }}</span>
+    <div class="flex flex-col gap-3">
+      <h1 class="text-5xl font-black">{{ amount }}</h1>
+      <div :class="['flex items-center', note]">
+        <Icon :name="props.iicon" size="20"/>
+        <span class="">{{ message }}</span>
+      </div>
     </div>
   </div>
 </template>
