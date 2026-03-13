@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="p-6 border border-line rounded-lg hover:shadow-md hover:translate-y-[-5px] transition duration-300 ease">
+  <div class="p-6 border border-line rounded-lg hover:shadow-md hover:translate-y-[-5px] cursor-pointer transition duration-300 ease">
     <div class="flex justify-between items-center pb-6">
       <h1>{{ label }}</h1>
       <div :class="['w-10 h-10 rounded-lg flex items-center justify-center text-2xl', color]">
