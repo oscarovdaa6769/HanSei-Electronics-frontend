@@ -3,7 +3,7 @@ import baseBtn from '/components/baseBtn.vue'
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 border-r border-line rounded-sm p-10">
+  <div class="flex flex-col gap-6 border-r border-line rounded-sm px-5 py-10">
     <div class="border-b pb-10 border-line flex items-center justify-center">
       <img src="/assets/images/HanSei Electronics.png" alt="Logo">
     </div>
