@@ -16,6 +16,6 @@
       14:32:35
     </span>
   </div>
-
 </div>
+
 </template>
