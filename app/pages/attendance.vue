@@ -100,7 +100,7 @@ function selectDate(day) {
         </form>
         <div class="flex items-center gap-3">
           <div class="relative w-60">
-            <button @click="isOpen = !isOpen" class="w-full flex justify-between items-center px-4 py-2 border rounded-lg border-line bor">
+            <button @click="isOpen = !isOpen" class="w-full flex justify-between items-center px-4 py-2 border rounded-lg border-line">
               {{ selected }} <Icon name="solar:alt-arrow-down-bold" size="20"/>
             </button>
             <div class="absolute mt-2 w-full bg-light border-line border rounded-lg shadow-lg overflow-hidden z-1000" v-if="isOpen">
