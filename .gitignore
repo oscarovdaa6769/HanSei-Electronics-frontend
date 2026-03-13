@@ -23,12 +23,6 @@ logs
 .env.*
 !.env.example
 
-# TypeScript
-*.tsbuildinfo
-
-# Testing
-coverage
-
-# Temporary files
-*.tmp
-*.temp
+# package
+package-lock.json
+app/components/Header.vue
