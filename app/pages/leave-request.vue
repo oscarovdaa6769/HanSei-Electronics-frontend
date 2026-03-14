@@ -2,6 +2,8 @@
 import secondBtn from '/components/secondBtn.vue'
 import thirdBtn from '/components/thirdBtn.vue'
 import card2 from '/components/card2.vue'
+import card2Btn1 from '/components/card2Btn1.vue'
+import card2Btn2 from '/components/card2Btn2.vue'
 import { ref } from 'vue'
 
 const activeDropdown = ref(null)
@@ -171,34 +173,116 @@ function selectDate(day) {
         <secondBtn label="Apply Filters" icon="solar:filter-bold"/>
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-3">
-      <card2 shortName="BS" fullName="Bona Sovena" dep="Finance" id="PR-023" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 25, 2026" date2="Mar 30, 2026" period="5 Days" graph="Family vacation to Jeju Island. Need time off for travel and rest." status2="Requested: Mar 10, 2026">
-        <template #actions>
-          <button class="bg-green-500/20 backdrop-blur-md text-success py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-green-500/30">
-              <Icon name="solar:check-circle-bold" size="20"/>
-          </button>
-          <button class="bg-red-500/20 backdrop-blur-md text-danger py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-red-500/30">
-              <Icon name="solar:close-circle-bold cursor-pointer hover:bg-" size="20"/>
-          </button>
-        </template>
-      </card2>
-      <card2 shortName="DO" fullName="Det Oudomveasna" dep="IT" id="QC-015" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 18, 2026" date2="Mar 20, 2026" period="3 Days" graph=" Doctor's appointment and recovery from flu symptoms. Will provide medical certificate." status2="Requested: Mar 15, 2026">
-        <template #actions>
-          <button class="bg-green-500/20 backdrop-blur-md text-success py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-green-500/30">
-              <Icon name="solar:check-circle-bold" size="20"/>
-          </button>
-          <button class="bg-red-500/20 backdrop-blur-md text-danger py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-red-500/30">
-              <Icon name="solar:close-circle-bold cursor-pointer hover:bg-" size="20"/>
-          </button>
-        </template>
-      </card2>
-      <card2 shortName="TS" fullName="Thea Sithul" dep="IT" id="WH-008" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Personal Leave" icon="solar:user-bold" color2="bg-blue-500/20 backdrop-blur-md text-primary" date="Mar 22, 2026" date2="Mar 23, 2026" period="2 Days" graph="Personal family matters. Need to attend to urgent family situation." status2="Approved by: HR Manager">
-        <template #actions>
-          <button class="bg-blue-500/20 backdrop-blur-md text-primary py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-blue-500/30">
-            <Icon name="solar:eye-bold" size="20"/>
-          </button>
-        </template>
-      </card2>
+    <div class="flex flex-col gap-3">
+      <div class="grid grid-cols-3 gap-3">
+        <card2 shortName="BS" fullName="Bona Sovena" dep="Finance" id="PR-023" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 25, 2026" date2="Mar 30, 2026" period="5 Days" graph="Family vacation to Jeju Island. Need time off for travel and rest." status2="Requested: Mar 10, 2026">
+          <template #actions>
+            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
+          </template>
+        </card2>
+        <card2 shortName="DO" fullName="Det Oudomveasna" dep="IT" id="QC-015" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 18, 2026" date2="Mar 20, 2026" period="3 Days" graph="Doctor's appointment and recovery from flu symptoms. Will provide medical certificate." status2="Requested: Mar 15, 2026">
+          <template #actions>
+            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
+          </template>
+        </card2>
+        <card2 shortName="TS" fullName="Thea Sithul" dep="IT" id="WH-008" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Personal Leave" icon="solar:user-bold" color2="bg-blue-500/20 backdrop-blur-md text-primary" date="Mar 22, 2026" date2="Mar 23, 2026" period="2 Days" graph="Personal family matters. Need to attend to urgent family situation." status2="Approved by: HR Manager">
+          <template #actions>
+            <card2Btn1 icon="solar:eye-bold"/>
+          </template>
+        </card2>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <card2 shortName="CR" fullName="Cristiano Ronaldo" dep="Human Resource" id="MT-012" status="Rejected" color="backdrop-blur-md bg-red-500/20 text-danger" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 10, 2026" date2="Mar 17, 2026" period="7 Days" graph="Planned overseas vacation. Already purchased tickets." status2="Rejected: Mar 12, 2026">
+          <template #actions>
+            <card2Btn1 icon="solar:eye-bold"/>
+          </template>
+        </card2>
+        <card2 shortName="LM" fullName="Lionel Messi" dep="Marketing" id="PR-031" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Maternity Leave" icon="solar:baby-bold" color2="bg-green-500/20 backdrop-blur-md text-success" date="Apr 1, 2026" date2="Jul 1, 2026" period="90 Days" graph="Maternity leave. Due date is March 25, 2026. Medical certificate attached." status2="Requested: Mar 5, 2026">
+          <template #actions>
+            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
+          </template>
+        </card2>
+        <card2 shortName="NJ" fullName="Neymar Jr" dep="Finance" id="IT-005" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 14, 2026" date2="Mar 16, 2026" period="3 Days" graph="Dental surgery recovery. Cannot work due to pain and medication." status2="Approved by: HR Manager">
+          <template #actions>
+            <card2Btn1 icon="solar:eye-bold"/>
+          </template>
+        </card2>
+      </div>
+    </div>
+    <div class="border border-line rounded-lg overflow-hidden">
+      <div class="flex items-center justify-between w-full p-5">
+        <span class="">Leave History</span>
+        <secondBtn label="Export" icon="solar:export-bold"/>
+      </div>
+      <div class="overflow-x-auto bg-white">
+        <table class="w-full text-left">
+          <thead class="bg-gray-100 text-gray-400">
+            <tr>
+              <td class="px-6 py-5">Employee</td>
+              <td class="px-6 py-5">Department</td>
+              <td class="px-6 py-5">Leave Type</td>
+              <td class="px-6 py-5">Period</td>
+              <td class="px-6 py-5">Days</td>
+              <td class="px-6 py-5">Status</td>
+              <td class="px-6 py-5">Requested</td>
+              <td class="px-6 py-5">Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-line">
+              <td class="px-6 py-5">Bona Sovena</td>
+              <td class="px-6 py-5">Finance</td>
+              <td class="px-6 py-5">Annual Leave</td>
+              <td class="px-6 py-5">Mar 25-30, 2026</td>
+              <td class="px-6 py-5">5</td>
+              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span></td>
+              <td class="px-6 py-5">Mar 10, 2025</td>
+              <td class="px-6 py-5"><Icon name="solar:check-circle-bold" class="cursor-pointer bg-green-500/50 backdrop-blur-md hover:bg-success" size="20"/><Icon name="solar:close-circle-bold" class="cursor-pointer bg-red-500/50 backdrop-blur-md hover:bg-danger" size="20"/></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="border-t border-line">
+              <td class="px-6 py-5">Det Oudomveasna</td>
+              <td class="px-6 py-5">IT</td>
+              <td class="px-6 py-5">Sick Leave</td>
+              <td class="px-6 py-5">Mar 18-20, 2026</td>
+              <td class="px-6 py-5">3</td>
+              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span></td>
+              <td class="px-6 py-5">Mar 15, 2025</td>
+              <td class="px-6 py-5"><Icon name="solar:check-circle-bold" class="cursor-pointer bg-green-500/50 backdrop-blur-md hover:bg-success" size="20"/><Icon name="solar:close-circle-bold" class="cursor-pointer bg-red-500/50 backdrop-blur-md hover:bg-danger" size="20"/></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="border-t border-line">
+              <td class="px-6 py-5">Thea Sithul</td>
+              <td class="px-6 py-5">IT</td>
+              <td class="px-6 py-5">Personal Leave</td>
+              <td class="px-6 py-5">Mar 22-23, 2026</td>
+              <td class="px-6 py-5">2</td>
+              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approved</span></td>
+              <td class="px-6 py-5">Mar 12, 2025</td>
+              <td class="px-6 py-5"><Icon name="solar:eye-bold" class="cursor-pointer bg-blue-500/50 backdrop-blur-md hover:bg-primary" size="20"/></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="border-t border-line">
+              <td class="px-6 py-5">Cristiano Ronaldo</td>
+              <td class="px-6 py-5">Human Resource</td>
+              <td class="px-6 py-5">Annual Leave</td>
+              <td class="px-6 py-5">Mar 10-17, 2026</td>
+              <td class="px-6 py-5">7</td>
+              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approved</span></td>
+              <td class="px-6 py-5">Mar 5, 2025</td>
+              <td class="px-6 py-5"><Icon name="solar:eye-bold" class="cursor-pointer bg-blue-500/50 backdrop-blur-md hover:bg-primary" size="20"/></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="flex items-center justify-between p-4 border-t border-line">
+          <thirdBtn label="Previous"/>
+          <span class="text-gray-400">Page 1 of 3</span>
+          <thirdBtn label="Next"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>

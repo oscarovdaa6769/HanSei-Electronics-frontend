@@ -9,7 +9,7 @@ import Header from './components/Header.vue';
     <div class="">
       <Header/>
     </div>
-    <div class="w-full">
+    <div class="w-full ml-[250px]">
       <NuxtPage/>
     </div>
   </div>
