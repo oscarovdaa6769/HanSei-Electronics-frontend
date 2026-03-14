@@ -172,7 +172,33 @@ function selectDate(day) {
       </div>
     </div>
     <div class="grid grid-cols-3 gap-3">
-      <card2 shortName="BS" fullName="Bona Sovena" dep="Finance" id="PR-023"/>
+      <card2 shortName="BS" fullName="Bona Sovena" dep="Finance" id="PR-023" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 25, 2026" date2="Mar 30, 2026" period="5 Days" graph="Family vacation to Jeju Island. Need time off for travel and rest." status2="Requested: Mar 10, 2026">
+        <template #actions>
+          <button class="bg-green-500/20 backdrop-blur-md text-success py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-green-500/30">
+              <Icon name="solar:check-circle-bold" size="20"/>
+          </button>
+          <button class="bg-red-500/20 backdrop-blur-md text-danger py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-red-500/30">
+              <Icon name="solar:close-circle-bold cursor-pointer hover:bg-" size="20"/>
+          </button>
+        </template>
+      </card2>
+      <card2 shortName="DO" fullName="Det Oudomveasna" dep="IT" id="QC-015" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 18, 2026" date2="Mar 20, 2026" period="3 Days" graph=" Doctor's appointment and recovery from flu symptoms. Will provide medical certificate." status2="Requested: Mar 15, 2026">
+        <template #actions>
+          <button class="bg-green-500/20 backdrop-blur-md text-success py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-green-500/30">
+              <Icon name="solar:check-circle-bold" size="20"/>
+          </button>
+          <button class="bg-red-500/20 backdrop-blur-md text-danger py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-red-500/30">
+              <Icon name="solar:close-circle-bold cursor-pointer hover:bg-" size="20"/>
+          </button>
+        </template>
+      </card2>
+      <card2 shortName="TS" fullName="Thea Sithul" dep="IT" id="WH-008" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Personal Leave" icon="solar:user-bold" color2="bg-blue-500/20 backdrop-blur-md text-primary" date="Mar 22, 2026" date2="Mar 23, 2026" period="2 Days" graph="Personal family matters. Need to attend to urgent family situation." status2="Approved by: HR Manager">
+        <template #actions>
+          <button class="bg-blue-500/20 backdrop-blur-md text-primary py-2 rounded-lg w-full flex items-center justify-center cursor-pointer hover:bg-blue-500/30">
+            <Icon name="solar:eye-bold" size="20"/>
+          </button>
+        </template>
+      </card2>
     </div>
   </div>
 </template>
