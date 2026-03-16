@@ -1,6 +1,4 @@
 <template>
-  <div class="flex">
-    <Header />
     <div class="bg-gray-100 min-h-screen xl:w-[1200px]">
 
       <!-- Page Header -->
@@ -148,8 +146,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import Header from '~/components/Header.vue'
+import { ref, onMounted, onUnmounted } from 'vue';
 
 // Clock
 const currentTime = ref('')
