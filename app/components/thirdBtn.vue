@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <NuxtLink class="flex items-center gap-3 py-2 px-4 border border-line hover:bg-primary rounded-lg hover:text-light transition duration-200 ease cursor-pointer">
+  <NuxtLink class="flex items-center gap-3 py-2 px-4 border border-line hover:bg-primary rounded-lg hover:text-light transition duration-200 ease cursor-pointer bg-light">
     <span class="text-sm">{{ label }}</span>
   </NuxtLink>
 </template>

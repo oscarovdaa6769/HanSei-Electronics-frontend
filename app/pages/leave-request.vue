@@ -4,6 +4,7 @@ import thirdBtn from '/components/thirdBtn.vue'
 import card2 from '/components/card2.vue'
 import card2Btn1 from '/components/card2Btn1.vue'
 import card2Btn2 from '/components/card2Btn2.vue'
+import available from '/components/available.vue'
 import { ref } from 'vue'
 
 const activeDropdown = ref(null)
@@ -197,7 +198,7 @@ function selectDate(day) {
             <card2Btn1 icon="solar:eye-bold"/>
           </template>
         </card2>
-        <card2 shortName="LM" fullName="Lionel Messi" dep="Marketing" id="PR-031" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Maternity Leave" icon="solar:baby-bold" color2="bg-green-500/20 backdrop-blur-md text-success" date="Apr 1, 2026" date2="Jul 1, 2026" period="90 Days" graph="Maternity leave. Due date is March 25, 2026. Medical certificate attached." status2="Requested: Mar 5, 2026">
+        <card2 shortName="LM" fullName="Lionel Messi" dep="Marketing" id="PR-031" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Maternity Leave" icon="tabler:baby-carriage-filled" color2="bg-green-500/20 backdrop-blur-md text-success" date="Apr 1, 2026" date2="Jul 1, 2026" period="90 Days" graph="Maternity leave. Due date is March 25, 2026. Medical certificate attached." status2="Requested: Mar 5, 2026">
           <template #actions>
             <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
           </template>
@@ -211,7 +212,7 @@ function selectDate(day) {
     </div>
     <div class="border border-line rounded-lg overflow-hidden">
       <div class="flex items-center justify-between w-full p-5">
-        <span class="">Leave History</span>
+        <span class="text-xl font-black">Leave History</span>
         <secondBtn label="Export" icon="solar:export-bold"/>
       </div>
       <div class="overflow-x-auto bg-white">
@@ -271,7 +272,7 @@ function selectDate(day) {
               <td class="px-6 py-5">Annual Leave</td>
               <td class="px-6 py-5">Mar 10-17, 2026</td>
               <td class="px-6 py-5">7</td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approved</span></td>
+              <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Rejected</span></td>
               <td class="px-6 py-5">Mar 5, 2025</td>
               <td class="px-6 py-5"><Icon name="solar:eye-bold" class="cursor-pointer bg-blue-500/50 backdrop-blur-md hover:bg-primary" size="20"/></td>
             </tr>
@@ -283,6 +284,11 @@ function selectDate(day) {
           <thirdBtn label="Next"/>
         </div>
       </div>
+    </div>
+    <div class="grid grid-cols-3 gap-6">
+      <available :amount="15" type="Annual Leave Used" color="bg-primary" period="15/20 days"/>
+      <available :amount="3" type="Sick Leave Used" color="bg-warning" period="3/10 days"/>
+      <available :amount="2" type="Remaining PTO" color="bg-success" period="2 days left"/>
     </div>
   </div>
 </template>
