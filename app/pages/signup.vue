@@ -16,17 +16,20 @@
       </div>
 
       <div>
+
         <label class="block text-slate-500 mb-2 text-sm">Password</label>
         <input type="password" 
                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 transition border-opacity-60"
                placeholder="">
       </div>
 
+
       <div class="flex items-center justify-between text-sm">
         <label class="flex items-center text-slate-500 cursor-pointer">
           <input type="checkbox" class="mr-2 w-4 h-4 border-gray-300 rounded text-sky-300 focus:ring-sky-300">
           Stay connected
         </label>
+
         <a href="#" class="text-sky-500 hover:underline">Forgot your password?</a>
       </div>
 
@@ -37,30 +40,10 @@
       <p class="text-center text-slate-600 text-sm mt-6">
         Don't have an account? 
         <a href="#" class="text-sky-500 hover:underline">Create one for free!</a>
+
       </p>
     </form>
   </div>
 </div>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

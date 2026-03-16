@@ -33,13 +33,16 @@
       </div>
 
       <button type="submit" 
+
               class="w-full bg-sky-600 text-white font-semibold py-3 rounded-lg hover:bg-sky-800 transition shadow-sm active:scale-[0.98]">
+
         Log in
       </button>
 
       <p class="text-center text-slate-600 text-sm mt-6">
         Don't have an account? 
         <a href="#" class="text-red-500 hover:underline">Create one for free!</a>
+
       </p>
     </form>
   </div>
