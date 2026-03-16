@@ -143,6 +143,7 @@
         </button>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup>
