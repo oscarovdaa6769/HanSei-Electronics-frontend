@@ -4,7 +4,7 @@
     <div class="">
       <Header/>
     </div>
-    <div class="w-full ml-[250px]">
+    <div class="w-full">
       <NuxtPage/>
     </div>
   </div>
