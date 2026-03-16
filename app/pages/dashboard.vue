@@ -1,6 +1,5 @@
 <template>
-  <div class="flex">  
-    <Header />
+
   <div class="bg-gray-100 min-h-screen xl:w-full ">
 
     <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
@@ -114,7 +113,7 @@
 
 
   </div>
-  </div>
+
 
 </template>
 
