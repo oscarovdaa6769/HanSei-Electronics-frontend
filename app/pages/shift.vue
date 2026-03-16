@@ -1,11 +1,12 @@
 <template>
-    <div class="bg-gray-100 min-h-screen xl:w-[1200px]">
+  <div class="flex">
+    <div class="bg-gray-100 min-h-screen xl:w-full p-10">
 
       <!-- Page Header -->
       <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
         <div>
-          <h3 class="text-[24px] font-semibold md:text-gray-800">Dashboard</h3>
-          <p class="text-[14px] text-gray-500">Overview → Dashboard</p>
+          <h3 class="text-[24px] font-semibold md:text-gray-800">Shift</h3>
+          <p class="text-[14px] text-gray-500">Overview → Shift</p>
         </div>
         <div class="flex items-center gap-6 pt-4">
           <span class="text-gray-700 font-medium">Admin</span>
@@ -132,7 +133,7 @@
           @click="closeModal"
           class="text-sm border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-100"
         >
-          Cancel  
+          Cancel
         </button>
         <button
           @click="saveShift"
@@ -146,7 +147,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import Header from '~/components/Header.vue'
 
 // Clock
 const currentTime = ref('')
