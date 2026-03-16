@@ -69,7 +69,8 @@ const updateClock = () => {
   currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false })
 }
 
-const cards = [
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
 const cards = [
   { label: 'Total Employees', number: '5' },
@@ -77,6 +78,7 @@ const cards = [
   { label: 'On Leave', number: '1' },
   { label: 'OT This Month', number: '24h' },
 ]
+>>>>>>> feat/dashBoard
 
 const employees = ref([
   { name: 'Alice Johnson', time: '08:02', status: 'Present' },
@@ -97,6 +99,8 @@ const statusClass = (status) => {
   return 'bg-red-100 text-red-600'
 }
 
+=======
+>>>>>>> Stashed changes
 onMounted(() =>
     { updateClock(); clockInterval = setInterval(updateClock, 1000) })
 onUnmounted(() => clearInterval(clockInterval))
