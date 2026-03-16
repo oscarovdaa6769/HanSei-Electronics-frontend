@@ -1,8 +1,5 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
+
   <div class="flex w-screen">
     <div class="">
       <Header/>
@@ -12,3 +9,4 @@
     </div>
   </div>
 </template>
+
