@@ -21,9 +21,9 @@
 
 
   <div class="min-h-screen bg-slate-50 p-8 text-slate-900 font-sans">
-  
+
   <div class="flex justify-end gap-6 mb-6">
-    
+
     <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm w-full max-w-125">
       <div class="flex items-center gap-2 mb-6">
         <span class="text-xl text-slate-600"><i class="fa-solid fa-calendar"></i></span>
@@ -104,14 +104,14 @@
   ​​ ​   </div>
 
 <div class="min-h-screen bg-slate-50 p-2 text-slate-900 font-sans">
-  
+
   <div class="flex justify-end mb-6">
-    
+
     <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm w-full max-w-258">
       <div class="flex items-center gap-2 mb-6">
         <h2 class="text-lg font-semibold text-slate-800">Salary Overview</h2>
       </div>
-      
+
       <table class="w-full text-left">
         <thead class="text-xs text-slate-500 uppercase border-b border-slate-100">
            <tr>
@@ -149,7 +149,7 @@
           </tbody>
       </table>
     </div>
-    
+
   </div>
    </div>
   </div>
