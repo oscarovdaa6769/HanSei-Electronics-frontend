@@ -1,6 +1,6 @@
 <template>
 
-  <div class="bg-gray-100 min-h-screen xl:w-full ">
+  <div class="bg-gray-100 min-h-screen xl:w-full p-10">
 
     <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
       <div>
@@ -15,18 +15,7 @@
     <hr class="mt-3 border-gray-300">
 
 
-
-
-
-    <!-- Stat Cards -->
-    <div class="flex gap-4 mt-8 xl:pl-[10px] md:pl-[10px] md:pr-[10px] xl:pr-[20px] xl:justify-between md:justify-between">
-      <div v-for="card in cards" :key="card.label" class="bg-white rounded-xl p-6 xl:w-[270px] md:w-[180px] shadow hover:shadow-md hover:translate-y-[-5px] transition">
-        <p class="text-3xl font-bold text-blue-700">{{ card.number }}</p>
-        <p class="text-gray-500 text-sm mt-1">{{ card.label }}</p>
-      </div>
-    </div>
-
-
+    <CardDashboard />
 
 
 
@@ -34,12 +23,12 @@
 
 
     <!-- Recent Attendance -->
-    
+
     <div class="xl:flex md:block  xl:gap-4 mt-8 xl:pl-[10px] md:pl-[10px] md:pr-[10px] xl:pr-[20px] xl:pb-10 md:pb-10  xl:justify-between">
 
       <RecentAttendance />
       <BoxLeaveRequests />
-    
+
 
     </div>
 
@@ -74,8 +63,7 @@ const updateClock = () => {
   currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false })
 }
 
-<<<<<<< Updated upstream
-const cards = [ 
+const cards = [
   { label: 'Total Employees', number: '5' },
   { label: 'Present Today', number: '4' },
   { label: 'On Leave', number: '1' },
@@ -103,7 +91,7 @@ const statusClass = (status) => {
 
 =======
 >>>>>>> Stashed changes
-onMounted(() => 
+onMounted(() =>
     { updateClock(); clockInterval = setInterval(updateClock, 1000) })
 onUnmounted(() => clearInterval(clockInterval))
-</script>   
+</script>
