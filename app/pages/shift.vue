@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-gray-100 min-h-screen xl:w-[1200px]">
+  <div class="flex">
+    <div class="bg-gray-100 min-h-screen xl:w-full">
 
       <!-- Page Header -->
       <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
@@ -142,10 +143,12 @@
         </button>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import Header from '~/components/Header.vue'
 
 // Clock
 const currentTime = ref('')
