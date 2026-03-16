@@ -50,7 +50,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Header from '~/components/Header.vue';
+=======
+import CardDashboard from '~/components/cardDashboard.vue';
+import RecentAttendance from '~/components/boxRecentAttendance.vue';
+import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
+>>>>>>> Stashed changes
 =======
 import CardDashboard from '~/components/cardDashboard.vue';
 import RecentAttendance from '~/components/boxRecentAttendance.vue';
@@ -63,6 +69,8 @@ const updateClock = () => {
   currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false })
 }
 
+const cards = [
+<<<<<<< Updated upstream
 const cards = [
   { label: 'Total Employees', number: '5' },
   { label: 'Present Today', number: '4' },
@@ -89,8 +97,6 @@ const statusClass = (status) => {
   return 'bg-red-100 text-red-600'
 }
 
-=======
->>>>>>> Stashed changes
 onMounted(() =>
     { updateClock(); clockInterval = setInterval(updateClock, 1000) })
 onUnmounted(() => clearInterval(clockInterval))
