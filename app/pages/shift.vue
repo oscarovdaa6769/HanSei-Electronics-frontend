@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="bg-gray-100 min-h-screen xl:w-full">
+    <div class="bg-gray-100 min-h-screen xl:w-full p-10">
 
       <!-- Page Header -->
       <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
