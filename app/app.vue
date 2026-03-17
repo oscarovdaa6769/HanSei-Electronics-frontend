@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 
   <div class="flex w-screen">
     <div class="">
@@ -8,5 +9,8 @@
       <NuxtPage/>
     </div>
   </div>
+=======
+  <NuxtPage/>
+>>>>>>> origin/feat/dashBoard
 
 </template>
