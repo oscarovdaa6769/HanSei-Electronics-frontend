@@ -13,6 +13,7 @@ node_modules
 logs
 *.log
 
+
 # Misc
 .DS_Store
 .fleet
@@ -25,4 +26,3 @@ logs
 
 # package
 package-lock.json
-app/components/Header.vue
