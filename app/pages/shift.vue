@@ -3,10 +3,10 @@
     <div class="bg-gray-100 min-h-screen xl:w-full p-10">
 
       <!-- Page Header -->
-      <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
+      <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px]">
         <div>
 
-          <h3 class="text-[24px] font-semibold md:text-gray-800">Shift</h3>
+          <h3 class="text-4xl font-bold text-slate-900 tracking-tight">SHIFT</h3>
           <p class="text-[14px] text-gray-500">Overview → Shift</p>
 
         </div>
@@ -15,7 +15,7 @@
           <span class="text-gray-700 font-mono">{{ currentTime }}</span>
         </div>
       </div>
-      <hr class="mt-3 border-gray-300">
+
 
       <BoxShiftSchedules />
       <BoxEmployeeAssignments />

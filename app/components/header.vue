@@ -10,14 +10,14 @@ import baseBtn from '/components/baseBtn.vue'
     </div>
     <div class="flex flex-col gap-1 border-b border-line pb-5">
       <baseBtn type="Dashboard" icon="solar:home-2-bold" to="/"/>
-      <baseBtn type="Employees" icon="solar:users-group-rounded-bold" to=""/>
+      <baseBtn type="Employees" icon="solar:user-bold" to="/employees"/>
       <baseBtn type="Attendance" icon="solar:history-bold" to="/attendance"/>
       <baseBtn type="Shift" icon="solar:clock-circle-bold"/>
       <baseBtn type="Leave Requests" icon="solar:calendar-bold" to="/leave-request"/>
     </div>
     <div class="flex flex-col gap-1">
       <baseBtn type="Reports" icon="solar:chart-2-bold"/>
-      <baseBtn type="Settings" icon="solar:settings-bold"/>
+      <baseBtn type="Settings" icon="solar:settings-bold" to="/settings"/>
     </div>
     <div class="flex gap-4 items-center fixed bottom-0 left-0 border-t border-r border-line px-5 py-2 w-[250px] bg-light z-1001">
       <div class="w-13 h-13 rounded-full bg-secondary text-light flex items-center justify-center">

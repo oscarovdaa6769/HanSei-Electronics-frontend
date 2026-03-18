@@ -4,7 +4,7 @@
 
     <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
       <div>
-        <h3 class="text-[24px] font-semibold md:text-gray-800">Dashboard</h3>
+        <h3 class="text-4xl font-bold text-slate-900 tracking-tight">Dashboard</h3>
         <p class="text-[14px] text-gray-500">Overview --> Dashboard</p>
       </div>
       <div class="flex items-center gap-6 pt-4">
@@ -12,7 +12,6 @@
         <span class="text-gray-700 font-mono">{{ currentTime }}</span>
       </div>
     </div>
-    <hr class="mt-3 border-gray-300">
 
 
     <CardDashboard />
