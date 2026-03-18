@@ -276,7 +276,7 @@ function selectDate(day) {
             <tr class="border-t border-line">
               <td class="px-6 py-5">3</td>
               <td class="px-6 py-5">Thea Sithul</td>
-              <td class="px-6 py-5">IT</td>
+              <td class="px-6 py-5">Human Resource</td>
               <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Part time</span></td>
               <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Absent</span></td>
               <td class="px-6 py-5">-</td>
@@ -288,7 +288,7 @@ function selectDate(day) {
             <tr class="border-t border-line">
               <td class="px-6 py-5">4</td>
               <td class="px-6 py-5">Rin Vannara</td>
-              <td class="px-6 py-5">IT</td>
+              <td class="px-6 py-5">Marketing</td>
               <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Full time</span></td>
               <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Absent</span></td>
               <td class="px-6 py-5">-</td>
