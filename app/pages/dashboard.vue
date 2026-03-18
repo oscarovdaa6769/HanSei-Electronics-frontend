@@ -49,19 +49,15 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import Header from '~/components/Header.vue';
-=======
+
 import CardDashboard from '~/components/cardDashboard.vue';
 import RecentAttendance from '~/components/boxRecentAttendance.vue';
 import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
->>>>>>> Stashed changes
-=======
+
 import CardDashboard from '~/components/cardDashboard.vue';
 import RecentAttendance from '~/components/boxRecentAttendance.vue';
 import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
->>>>>>> Stashed changes
+
 
 const currentTime = ref('')
 let clockInterval = null
@@ -69,16 +65,12 @@ const updateClock = () => {
   currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false })
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
 const cards = [
   { label: 'Total Employees', number: '5' },
   { label: 'Present Today', number: '4' },
   { label: 'On Leave', number: '1' },
   { label: 'OT This Month', number: '24h' },
 ]
->>>>>>> feat/dashBoard
 
 const employees = ref([
   { name: 'Alice Johnson', time: '08:02', status: 'Present' },
@@ -99,8 +91,6 @@ const statusClass = (status) => {
   return 'bg-red-100 text-red-600'
 }
 
-=======
->>>>>>> Stashed changes
 onMounted(() =>
     { updateClock(); clockInterval = setInterval(updateClock, 1000) })
 onUnmounted(() => clearInterval(clockInterval))
