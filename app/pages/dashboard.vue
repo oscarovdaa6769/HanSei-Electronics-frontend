@@ -8,7 +8,7 @@
       <div class="flex items-center justify-end gap-3 w-full">
         <form class="relative w-full max-w-sm">
           <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
-          <input type="text" placeholder="Search requests..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
+          <input type="text" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
         </form>
         <div class="relative">
           <Icon name="solar:bell-bold" size="20"/>
@@ -22,12 +22,7 @@
       <card label="On Leave" icon="solar:calendar-mark-bold" :amount="8" iicon="" message="4 pending requests" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
       <card label="Late Today" icon="solar:clock-circle-bold" :amount="6" iicon="solar:arrow-down-linear" message="-2 from yesterday" note="text-danger" color="bg-red-500/20 backdrop-blue-md text-danger"/>
     </div>
-  </div>
-  <div class="bg-gray-100 min-h-screen xl:w-full p-10">
-    <hr class="mt-3 border-gray-300">
-
-
-    <div class="xl:flex md:block xl:gap-4 mt-8 xl:pl-[10px] md:pl-[10px] md:pr-[10px] xl:pr-[20px] xl:pb-10 md:pb-10 xl:justify-between">
+    <div class="flex items-start gap-6">
       <boxRecentAttendance />
       <BoxLeaveRequests />
     </div>

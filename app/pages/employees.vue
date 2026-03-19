@@ -8,7 +8,7 @@
       <div class="flex items-center gap-3 w-full">
         <form class="relative w-full max-w-sm">
           <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
-          <input type="text" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
+          <input type="text" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" v-model="search"/>
         </form>
         <secondBtn label="Add Employee" icon="solar:add-circle-bold" @click="isModalOpen = true"/>
         <div class="relative">
@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="emp in employees" :key="emp.id" class="border-t border-line">
+            <tr v-for="emp in filteredEmployees" :key="emp.id" class="border-t border-line">
               <td class="py-5 px-6">{{ emp.id }}</td>
               <td class="py-5 px-6">{{ emp.name }}</td>
               <td class="py-5 px-6">{{ emp.department }}</td>
@@ -74,22 +74,22 @@
         <form @submit.prevent="saveEmployee" class="space-y-4">
           <div>
             <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Full Name</label>
-            <input v-model="newEmp.name" type="text" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500" placeholder="John Doe">
+            <input v-model="newEmp.name" type="text" required class="w-full bg-slate-50 border border-line rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500" placeholder="John Doe">
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">	Department</label>
-              <input v-model="newEmp.department" type="text" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:border-cyan-500" placeholder="Engineering">
+              <input v-model="newEmp.department" type="text" required class="w-full bg-slate-50 border border-line rounded-lg px-4 py-2 text-slate-900 focus:border-cyan-500" placeholder="Engineering">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Position</label>
-              <input v-model="newEmp.position" type="text" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:border-cyan-500" placeholder="Software Engineer ">
+              <input v-model="newEmp.position" type="text" required class="w-full bg-slate-50 border border-line rounded-lg px-4 py-2 text-slate-900 focus:border-cyan-500" placeholder="Software Engineer ">
             </div>
           </div>
 
           <div class="flex gap-3 mt-8">
-            <button type="button" @click="isModalOpen = false" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-500 font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
-            <button type="submit" class="flex-1 px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-bold transition-all">Save Employee</button>
+            <button type="button" @click="isModalOpen = false" class="flex-1 px-4 py-2.5 rounded-lg border border-line text-gray-400 font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+            <button type="submit" class="flex-1 px-4 py-2.5 rounded-lg bg-primary hover:bg-blue-800 text-light font-bold transition-all">Save Employee</button>
           </div>
         </form>
       </div>
@@ -98,7 +98,7 @@
 </template>
 
 <script setup>
-import { id } from '@nuxt/ui/runtime/locale/index.js';
+import { ref, computed } from 'vue';
 import {onMounted } from 'vue';
 import secondBtn from '/components/secondBtn.vue';
 
@@ -142,7 +142,7 @@ const employees = ref([
 },
 ])
 
-const newEmp = ref({ neme: '', department: '', position: '' });
+const newEmp = ref({ name: '', department: '', position: '' });
 
 const saveEmployee = () => {
   const lastIdNum = employees.value.length > 0
@@ -169,4 +169,15 @@ const saveEmployee = () => {
   update();
   setInterval(update, 1000);
  });
+
+const search = ref('')
+
+const filteredEmployees = computed(() => {
+  return employees.value.filter(emp =>
+    emp.name.toLowerCase().includes(search.value.toLowerCase()) ||
+    emp.department.toLowerCase().includes(search.value.toLowerCase()) ||
+    emp.position.toLowerCase().includes(search.value.toLowerCase()) ||
+    emp.id.toLowerCase().includes(search.value.toLowerCase()) 
+  )
+})
 </script>
