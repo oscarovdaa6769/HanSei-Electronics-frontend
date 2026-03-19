@@ -108,8 +108,10 @@ function selectDate(day) {
           <input type="text" placeholder="Search requests..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
         </form>
         <secondBtn label="New Request" icon="solar:add-circle-bold"/>
-        <Icon name="solar:bell-bold" size="20" class="relative"/>
-        <div class="w-5 h-5 rounded-full bg-danger flex items-center justify-center text-light absolute right-7 top-15 text-sm">5</div>
+        <div class="relative">
+          <Icon name="solar:bell-bold" size="20"/>
+          <div class="w-5 h-5 rounded-full bg-danger flex items-center justify-center text-light absolute -right-2 -top-2 text-sm">5</div>
+        </div>
       </div>
     </div>
     <div class="">
