@@ -1,5 +1,4 @@
 <template>
-
   <div class="flex w-screen">
     <div class="">
       <Header/>
