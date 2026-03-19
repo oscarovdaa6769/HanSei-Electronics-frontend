@@ -1,37 +1,31 @@
 <template>
-    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden xl:ml-[10px] xl:mr-[20px] xl:mt-[20px]">
-        <div class="xl:pl-[10px] mt-[10px] mb-3">
-          <h3 class="text-base font-medium mb-[10px]">Shift Schedules</h3>
-          <button
-            @click="showModal = true"
-            class="text-sm border border-gray-300 bg-white rounded-lg px-3 py-1.5 hover:bg-gray-100 w-full"
-          >
-            + Create Shift
-          </button>
-        </div>
-        <table class="w-full text-sm">
-          <thead class="bg-gray-50 text-gray-500 text-xs">
-            <tr>
-              <th class="text-left px-4 py-2.5">Shift Name</th>
-              <th class="text-left px-4 py-2.5">Start</th>
-              <th class="text-left px-4 py-2.5">End</th>
-              <th class="text-left px-4 py-2.5">Days</th>
-              <th class="text-left px-4 py-2.5">Assigned</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="shift in shifts" :key="shift.id" class="border-t border-gray-100">
-              <td class="px-4 py-3">{{ shift.name }}</td>
-              <td class="px-4 py-3">{{ shift.start }}</td>
-              <td class="px-4 py-3">{{ shift.end }}</td>
-              <td class="px-4 py-3">{{ shift.days }}</td>
-              <td class="px-4 py-3">{{ shift.assigned }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Create Shift Modal -->
+  <div class="border border-line rounded-lg overflow-hidden">
+    <div class="flex items-center justify-between w-full p-5">
+      <span class="text-xl font-black">Shift Schedules</span>
+    </div>
+    <div class="overflow-x-auto bg-white">
+      <table class="w-full text-left">
+        <thead class="bg-gray-100 text-gray-400">
+          <tr>
+            <td class="px-6 py-5">Shift Name</td>
+            <td class="px-6 py-5">Start</td>
+            <td class="px-6 py-5">End</td>
+            <td class="px-6 py-5">Days</td>
+            <td class="px-6 py-5">Assigned</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="shift in shifts" :key="shift.id" class="border-t border-line">
+            <td class="px-6 py-5">{{ shift.name }}</td>
+            <td class="px-6 py-5">{{ shift.start }}</td>
+            <td class="px-6 py-5">{{ shift.end }}</td>
+            <td class="px-6 py-5">{{ shift.days }}</td>
+            <td class="px-6 py-5">{{ shift.assigned }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div
     v-if="showModal"
     class="fixed inset-0 bg-black/30 z-50 flex items-center justify-center"
@@ -84,7 +78,7 @@
           @click="closeModal"
           class="text-sm border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-100"
         >
-          Cancel  
+          Cancel
         </button>
         <button
           @click="saveShift"

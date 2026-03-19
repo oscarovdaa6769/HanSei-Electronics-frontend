@@ -144,16 +144,16 @@ function selectDate(day) {
     </div>
     <div class="p-5 flex items-center justify-between bg-gray-100 rounded-lg">
       <div class="flex items-center gap-3">
-          <div class="flex items-center justify-between gap-3 border border-line px-4 py-2 rounded-lg w-90 bg-light cursor-pointer">
-            <button class="p-1 hover:bg-gray-100 rounded-lg flex items-center justify-center" @click="prevDay">
-              <Icon name="solar:alt-arrow-left-bold" size="20"/>
-            </button>
-            <span class="">{{ months[month] }} {{ day }}, {{ year }}</span>
-            <button class="p-1 hover:bg-gray-100 rounded-lg flex items-center justify-center" @click="nextDay">
-              <Icon name="solar:alt-arrow-right-bold" size="20"/>
-            </button>
-          </div>
-          <thirdBtn label="Today"/>
+        <div class="flex items-center justify-between gap-3 border border-line px-4 py-2 rounded-lg w-90 bg-light cursor-pointer">
+          <button class="p-1 hover:bg-gray-100 rounded-lg flex items-center justify-center" @click="prevDay">
+            <Icon name="solar:alt-arrow-left-bold" size="20"/>
+          </button>
+          <span class="">{{ months[month] }} {{ day }}, {{ year }}</span>
+          <button class="p-1 hover:bg-gray-100 rounded-lg flex items-center justify-center" @click="nextDay">
+            <Icon name="solar:alt-arrow-right-bold" size="20"/>
+          </button>
+        </div>
+        <thirdBtn label="Today"/>
       </div>
       <div class="flex items-center gap-3">
         <thirdBtn label="Daily"/>

@@ -1,32 +1,33 @@
 <template>
-    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden xl:ml-[10px] xl:mr-[20px] xl:mt-[20px]">
-        <div class="xl:pl-[10px] mt-[10px] mb-3">
-          <h3 class="text-base font-medium">Employee Assignments</h3>
-        </div>
-        <table class="w-full text-sm">
-          <thead class="bg-gray-50 text-gray-500 text-xs">
-            <tr>
-              <th class="text-left px-4 py-2.5">Employee</th>
-              <th class="text-left px-4 py-2.5">Current Shift</th>
-              <th class="text-left px-4 py-2.5">Department</th>
-              <th class="text-left px-4 py-2.5">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="emp in employees" :key="emp.id" class="border-t border-gray-100">
-              <td class="px-4 py-3">{{ emp.employee }}</td>
-              <td class="px-4 py-3">{{ emp.current }}</td>
-              <td class="px-4 py-3">{{ emp.department }}</td>
-              <td class="px-4 py-3">
-                <button class="text-sm border border-gray-300 rounded-lg px-3 py-1 hover:bg-gray-100">
-                  {{ emp.action }}
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+  <div class="border border-line rounded-lg overflow-hidden">
+    <div class="flex items-center justify-between w-full p-5">
+      <span class="text-xl font-black">Employee Assignments</span>
+    </div>
+    <div class="overflow-x-auto bg-white">
+      <table class="w-full text-left">
+        <thead class="bg-gray-100 text-gray-400">
+          <tr>
+            <td class="px-6 py-5">Employee</td>
+            <td class="px-6 py-5">Current Shift</td>
+            <td class="px-6 py-5">Department</td>
+            <td class="px-6 py-5">Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="emp in employees" :key="emp.id" class="border-t border-line">
+            <td class="px-6 py-5">{{ emp.employee }}</td>
+            <td class="px-6 py-5">{{ emp.current }}</td>
+            <td class="px-6 py-5">{{ emp.department }}</td>
+            <td class="px-6 py-5">
+              <span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg cursor-pointer">
+                {{ emp.action }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 <script setup>
 // Employees

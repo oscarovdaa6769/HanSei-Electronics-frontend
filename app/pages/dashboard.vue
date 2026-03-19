@@ -27,9 +27,8 @@
     <hr class="mt-3 border-gray-300">
 
 
-    <!-- Recent Attendance -->
     <div class="xl:flex md:block xl:gap-4 mt-8 xl:pl-[10px] md:pl-[10px] md:pr-[10px] xl:pr-[20px] xl:pb-10 md:pb-10 xl:justify-between">
-      <!-- <RecentAttendance /> -->
+      <boxRecentAttendance />
       <BoxLeaveRequests />
     </div>
   </div>
@@ -41,7 +40,7 @@ import card from '/components/card.vue'
 
 // Fix: Remove duplicate imports, keep only one of each
 import CardDashboard from '/components/cardDashboard.vue';
-// import RecentAttendance from '~/components/RecentAttendance.vue';
+import boxRecentAttendance from '~/components/boxRecentAttendance.vue';
 import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
 
 const currentTime = ref('');

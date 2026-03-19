@@ -1,25 +1,31 @@
 <template>
-  <div class="flex">
-    <div class="bg-gray-100 min-h-screen xl:w-full p-10">
-
-      <!-- Page Header -->
-      <div class="xl:flex xl:pl-[10px] md:pl-[20px] justify-between xl:pr-[20px] pt-4">
-        <div>
-          <h3 class="text-[24px] font-semibold md:text-gray-800">Shift</h3>
-          <p class="text-[14px] text-gray-500">Overview → Shift</p>
-        </div>
-        <div class="flex items-center gap-6 pt-4">
-          <span class="text-gray-700 font-medium">Admin</span>
-          <span class="text-gray-700 font-mono">{{ currentTime }}</span>
+  <div class="p-10 w-full flex flex-col gap-9">
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-3 w-full">
+        <h1 class="text-4xl font-black uppercase">Shift Management</h1>
+        <span class="text-gray-400">Create and manage work shifts, schedules, and assignments</span>
+      </div>
+      <div class="flex items-center gap-3 w-full">
+        <form class="relative max-w-sm">
+          <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
+          <input type="text" placeholder="Search employees..." class=" pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
+        </form>
+        <secondBtn label="Create Shift" icon="solar:add-circle-bold" @click="showModal = true"/>
+        <secondBtn label="Assign" icon="solar:user-plus-bold"/>
+        <div class="relative">
+          <Icon name="solar:bell-bold" size="20"/>
+          <div class="w-5 h-5 rounded-full bg-danger flex items-center justify-center text-light absolute -right-2 -top-2 text-sm">5</div>
         </div>
       </div>
-      <hr class="mt-3 border-gray-300">
-
-      <BoxShiftSchedules />
-      <BoxEmployeeAssignments />
-
-
     </div>
+    <div class="grid grid-cols-4 gap-6">
+      <card label="Total Shift" icon="solar:clock-circle-bold" :amount="4" iicon="" message="3 active, 1 inactive" note="text-gray-400" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
+      <card label="Unassigned Employees" icon="solar:user-cross-bold" :amount="12" iicon="" message="Need shift assignment" note="text-gray-400" color="bg-green-500/20 backdrop-blur-md text-success"/>
+      <card label="Employees per Shift" icon="solar:users-group-rounded-bold" :amount="45" iicon="" message="Average per shift" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
+      <card label="Weekly Assignments" icon="solar:calendar-mark-bold" :amount="312" iicon="" message="Total shifts assigned" note="text-gray-400" color="bg-purple-500/20 backdrop-blue-md text-purple-500"/>
+    </div>
+    <BoxShiftSchedules />
+    <BoxEmployeeAssignments />
   </div>
 
   <!-- Create Shift Modal -->
