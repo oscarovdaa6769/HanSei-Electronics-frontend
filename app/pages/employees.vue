@@ -5,7 +5,7 @@
         <h1 class="text-4xl font-black uppercase">Employees</h1>
         <span class="text-gray-400">Manage employee information and roles</span>
       </div>
-      <div class="flex items-center gap-3 w-full">
+      <div class="flex items-center justify-end gap-3 w-full">
         <form class="relative w-full max-w-sm">
           <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
           <input type="text" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" v-model="search"/>
@@ -177,7 +177,7 @@ const filteredEmployees = computed(() => {
     emp.name.toLowerCase().includes(search.value.toLowerCase()) ||
     emp.department.toLowerCase().includes(search.value.toLowerCase()) ||
     emp.position.toLowerCase().includes(search.value.toLowerCase()) ||
-    emp.id.toLowerCase().includes(search.value.toLowerCase()) 
+    emp.id.toLowerCase().includes(search.value.toLowerCase())
   )
 })
 </script>

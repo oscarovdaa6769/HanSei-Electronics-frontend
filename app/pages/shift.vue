@@ -5,7 +5,7 @@
         <h1 class="text-4xl font-black uppercase">Shift Management</h1>
         <span class="text-gray-400">Create and manage work shifts, schedules, and assignments</span>
       </div>
-      <div class="flex items-center gap-3 w-full">
+      <div class="flex items-center justify-end gap-3 w-full">
         <form class="relative max-w-sm">
           <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
           <input type="text" placeholder="Search employees..." class=" pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>

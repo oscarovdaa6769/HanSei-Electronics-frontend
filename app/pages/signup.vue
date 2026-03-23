@@ -1,54 +1,117 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-  <div class="bg-white p-10 rounded-2xl shadow-sm w-full max-w-md border border-gray-100">
-
-    <div class="flex flex-col items-center mb-8">
-
-      <h1 class="text-3xl font-bold text-slate-800 tracking-tight">Signup</h1>
-    </div>
-
-    <form class="space-y-5">
-      <div>
-        <label class="block text-slate-500 mb-2 text-sm">Email address</label>
-        <input type="email"
-               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 transition border-opacity-60"
-               placeholder="">
+  <div class="min-h-screen bg-secondary flex items-center justify-center p-4">
+    <div class="bg-white p-10 rounded-lg shadow-lg w-full max-w-md border border-line">
+      <div class="flex flex-col items-center mb-8">
+        <h1 class="text-3xl font-black text-primary tracking-tight">Signup</h1>
       </div>
 
-      <div>
+      <form class="space-y-5" @submit.prevent="handleSignup">
+        <div>
+          <label class="block text-gray-400 mb-2 text-sm">Email address</label>
+          <input
+            v-model="form.email"
+            type="email"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-line focus:outline-none focus:ring-2 focus:ring-primary transition border-opacity-60"
+            placeholder="you@example.com"
+          />
+        </div>
 
-        <label class="block text-slate-500 mb-2 text-sm">Password</label>
-        <input type="password"
-               class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 transition border-opacity-60"
-               placeholder="">
-      </div>
+        <div>
+          <label class="block text-gray-400 mb-2 text-sm">Password</label>
+          <input
+            v-model="form.password"
+            type="password"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-line focus:outline-none focus:ring-2 focus:ring-primary transition border-opacity-60"
+            placeholder="••••••••"
+          />
+        </div>
 
+        <button
+          type="submit"
+          :disabled="loading"
+          class="block w-full bg-primary text-white font-semibold py-3 rounded-lg hover:bg-blue-800 transition shadow-md active:scale-95 disabled:opacity-50"
+        >
+          {{ loading ? 'Creating...' : 'Sign up' }}
+        </button>
 
-      <div class="flex items-center justify-between text-sm">
-        <label class="flex items-center text-slate-500 cursor-pointer">
-          <input type="checkbox" class="mr-2 w-4 h-4 border-gray-300 rounded text-sky-300 focus:ring-sky-300">
-          Stay connected
-        </label>
+        <p v-if="error" class="text-danger text-center text-sm mt-3">{{ error }}</p>
+      </form>
 
-        <a href="#" class="text-sky-500 hover:underline">Forgot your password?</a>
-      </div>
-
-    <a href="http://localhost:3000/login"
-   class="block text-center w-full bg-sky-600 text-white font-semibold py-3 rounded-lg hover:bg-sky-800 transition shadow-md active:scale-95">
-   Log in
-</a>
-      <p class="text-center text-slate-600 text-sm mt-6">
-        Don't have an account?
-        <a href="#" class="text-sky-500 hover:underline">Create one for free!</a>
-
+      <p class="text-center text-gray-400 text-sm mt-6">
+        Already have an account?
+        <NuxtLink to="/login" class="text-primary hover:underline">Log in</NuxtLink>
       </p>
-    </form>
+    </div>
   </div>
-</div>
 </template>
 
-<script setup lang="js">
-definePageMeta({
-  layout: 'auth'
+<script setup>
+definePageMeta({ layout: 'auth' })
+
+const { register } = useAuth()           // ← from composable
+
+const form = reactive({
+  email: '',
+  password: ''
 })
+
+const loading = ref(false)
+const error = ref('')
+
+async function handleSignup() {
+  loading.value = true
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  try {
+    await signUp({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      // password_confirmation: form.password,   // uncomment if your Laravel validation requires it
+    })
+
+    await fetchUser()
+    successMessage.value = 'Account created! You are now logged in.'
+    setTimeout(() => navigateTo('/dashboard'), 1800)
+
+  } catch (err) {
+    console.error('Full signup error:', err)                     // ← important: look in console!
+
+    let msg = 'Signup failed'
+
+    if (err.response) {
+      const res = err.response
+      console.log('Status:', res.status)
+      console.log('Response data:', res._data || res.data)
+
+      if (res.status === 422) {
+        // Laravel validation error – show first error nicely
+        const errors = res._data?.errors || {}
+        const firstField = Object.keys(errors)[0]
+        if (firstField) {
+          msg = errors[firstField][0] || 'Validation failed'
+        } else {
+          msg = res._data?.message || 'Invalid data'
+        }
+      } else if (res.status === 419) {
+        msg = 'CSRF token mismatch (419) – check .env Sanctum config'
+      } else if (res.status === 401) {
+        msg = 'Unauthenticated (401) – possible session issue'
+      } else if (res.status === 419 || res.status === 429) {
+        msg = 'Too many attempts or CSRF issue'
+      } else {
+        msg = res._data?.message || `Server error (${res.status})`
+      }
+    } else if (err.message) {
+      msg = err.message
+    }
+
+    errorMessage.value = msg
+  } finally {
+    loading.value = false
+  }
+}
 </script>

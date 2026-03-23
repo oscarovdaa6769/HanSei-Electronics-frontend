@@ -20,9 +20,9 @@ import baseBtn from '/components/baseBtn.vue'
     </div>
     <div class="flex gap-4 items-center fixed bottom-0 left-0 border-t border-r border-line px-5 py-2 w-[250px] bg-light z-1001">
       <div class="w-13 h-13 rounded-full bg-secondary text-light flex items-center justify-center">
-        <span class="text-lg font-black">BS</span>
+        <NuxtLink to="/profile" class="text-lg font-black">BS</NuxtLink>
       </div>
-      <h1 class="text-lg font-bold">Bona Sovena</h1>
+      <NuxtLink to="/profile" class="text-lg font-bold">Bona Sovena</NuxtLink>
     </div>
   </div>
 </template>

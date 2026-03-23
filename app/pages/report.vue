@@ -1,157 +1,184 @@
 <template>
-
-  <div class="flex items-center justify-between bg-white p-7 text-slate-900 border-b border-slate-200">
-    <div class="flex flex-col">
-      <h1 class="text-2xl font-bold tracking-tight">Reports</h1>
-      <nav class="text-sm text-slate-500 mt-1">
-        Overview <span class="mx-1">/</span> Reports
-      </nav>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium border border-blue-200">
-        Admin
-      </span>
-      <span class="text-slate-500 text-sm font-mono">
-        14:32:35
-      </span>
-    </div>
-  </div>
-
-
-
-  <div class="min-h-screen bg-slate-50 p-8 text-slate-900 font-sans">
-
-  <div class="flex justify-end gap-6 mb-6">
-
-    <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm w-full max-w-125">
-      <div class="flex items-center gap-2 mb-6">
-        <span class="text-xl text-slate-600"><i class="fa-solid fa-calendar"></i></span>
-        <h2 class="text-lg font-semibold text-slate-800">Attendance</h2>
+  <div class="p-10 w-full flex flex-col gap-9">
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-3 w-full">
+        <h1 class="text-4xl font-black uppercase">Reports & Analytics</h1>
+        <span class="text-gray-400">View and export attendance, leave, and salary reports</span>
       </div>
-      <table class="w-full text-left">
-        <thead class="text-xs text-slate-500 uppercase border-b border-slate-100">
-          <tr>
-              <th class="pb-3">Date</th>
-              <th class="pb-3">Employee</th>
-              <th class="pb-3">Status</th>
+      <div class="flex items-center justify-end gap-3 w-full">
+        <form class="relative w-full max-w-sm">
+          <Icon
+            name="solar:magnifer-linear"
+            size="20"
+            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+          />
+          <input
+            type="text"
+            placeholder="Search employees..."
+            class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            v-model="search"
+          />
+        </form>
+        <div class="relative">
+          <Icon name="solar:bell-bold" size="20" />
+          <div
+            class="w-5 h-5 rounded-full bg-danger flex items-center justify-center text-light absolute -right-2 -top-2 text-sm"
+          >
+            5
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-6">
+      <card label="Total Working Days" icon="solar:calendar-mark-bold" :amount="22" iicon="" message="March 2026" note="text-gray-400" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
+      <card label="Attendance Rate" icon="solar:clipboard-check-bold" :amount="'91.5%'" iicon="solar:arrow-up-linear" message="2.3% from last month" note="text-gray-400" color="bg-green-500/20 backdrop-blur-md text-success"/>
+      <card label="Total Late Arrivals" icon="solar:clock-circle-bold" :amount="48" iicon="solar:arrow-down-linear" message="12 from last month" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
+      <card label="Total Absences" icon="solar:user-cross-bold" :amount="32" iicon="" message="8 unexcused" note="text-gray-400" color="bg-red-500/20 backdrop-blue-md text-danger"/>
+    </div>
+    <div class="flex items-start gap-6">
+      <div class="border border-line rounded-lg overflow-hidden w-full">
+        <div class="flex items-center justify-between w-full p-5">
+          <span class="text-xl font-black">Attendance</span>
+        </div>
+        <div class="overflow-x-auto bg-white">
+          <table class="w-full text-left">
+            <thead
+              class="bg-gray-100 text-gray-400"
+            >
+              <tr>
+                <td class="px-6 py-5">Date</td>
+                <td class="px-6 py-5">Employee</td>
+                <td class="px-6 py-5">Status</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-line">
+                <td class="px-6 py-5">2026-03-12</td>
+                <td class="px-6 py-5">Sarah Williams</td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg"
+                  >
+                    Present
+                  </span>
+                </td>
+              </tr>
+              <tr class="border-t border-line">
+                <td class="px-6 py-5">2026-03-12</td>
+                <td class="px-6 py-5">David Miller</td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg"
+                  >
+                    On Leave
+                  </span>
+                </td>
+              </tr>
+              <tr class="border-t border-line">
+                <td class="px-6 py-5">2026-03-12</td>
+                <td class="px-6 py-5">Emma Davis</td>
+                <td class="px-6 py-5">
+                  <span
+                    class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg"
+                  >
+                    On Leave
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="border border-line rounded-lg overflow-hidden w-full">
+        <div class="flex items-center justify-between w-full p-5">
+          <span class="text-xl font-black">Leave History</span>
+        </div>
+        <table class="w-full text-left">
+          <thead
+            class="bg-gray-100 text-gray-400"
+          >
+            <tr>
+              <td class="px-6 py-5">Employee</td>
+              <td class="px-6 py-5">Type</td>
+              <td class="px-6 py-5">Status</td>
             </tr>
           </thead>
-          <tbody class="text-sm">
-  <tr class="border-b border-slate-50">
-    <td class="py-3 text-slate-600">2026-03-12</td>
-    <td class="py-3 font-medium">Sarah Williams</td>
-    <td class="py-3">
-      <span class="bg-emerald-100 text-emerald-700 px-3 py-1 text-xs font-medium rounded-full">
-        Present
-      </span>
-    </td>
-  </tr>
-  <tr class="border-b border-slate-50">
-    <td class="py-3 text-slate-600">2026-03-12</td>
-    <td class="py-3 font-medium">David Miller</td>
-    <td class="py-3">
-      <span class="bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium rounded-full">
-        On Leave
-      </span>
-    </td>
-  </tr>
-  <tr class="border-b border-slate-50">
-    <td class="py-3 text-slate-600">2026-03-12</td>
-    <td class="py-3 font-medium">Emma Davis</td>
-    <td class="py-3">
-      <span class="bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium rounded-full">
-        On Leave
-      </span>
-    </td>
-  </tr>
-</tbody>
-      </table>
-    </div>
-
-    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm w-full max-w-122">
-      <div class="flex items-center gap-2 mb-6">
-        <h2 class="text-lg font-semibold text-slate-800">Leave History</h2>
-      </div>
-      <table class="w-full text-left">
-        <thead class="text-xs text-slate-500 uppercase border-b border-slate-100">
-          <tr>
-              <th class="pb-3">Employee</th>
-              <th class="pb-3">Type</th>
-              <th class="pb-3">Status</th>
-            </tr>
-          </thead>
-          <tbody class="text-sm">
-            <tr class="border-b border-slate-50">
-              <td class="py-3 font-medium">Emma Davis</td>
-              <td class="py-3 text-slate-600">Annual Leave</td>
-              <td class="py-3"><span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-medium">Approved</span></td>
+          <tbody>
+            <tr class="border-t border-line">
+              <td class="px-6 py-5">Emma Davis</td>
+              <td class="px-6 py-5">Annual Leave</td>
+              <td class="px-6 py-5">
+                <span
+                  class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approved</span>
+              </td>
             </tr>
             <tr class="border-b border-slate-50">
-              <td class="py-3 font-medium">Carol White</td>
-              <td class="py-3 text-slate-600">Sick Leave</td>
-              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">Pending</span></td>
+              <td class="px-6 py-5">Carol White</td>
+              <td class="px-6 py-5">Sick Leave</td>
+              <td class="px-6 py-5">
+                <span
+                  class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span>
+              </td>
             </tr>
             <tr class="border-b border-slate-50">
-              <td class="py-3 font-medium">David Miller</td>
-              <td class="py-3 text-slate-600">Sick Leave</td>
-              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">Pending</span></td>
+              <td class="px-6 py-5">David Miller</td>
+              <td class="px-6 py-5">Sick Leave</td>
+              <td class="px-6 py-5">
+                <span
+                  class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span>
+              </td>
             </tr>
           </tbody>
-      </table>
+        </table>
+      </div>
     </div>
-
-  ​​ ​   </div>
-
-<div class="min-h-screen bg-slate-50 p-2 text-slate-900 font-sans">
-
-  <div class="flex justify-end mb-6">
-
-    <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm w-full max-w-258">
-      <div class="flex items-center gap-2 mb-6">
-        <h2 class="text-lg font-semibold text-slate-800">Salary Overview</h2>
+    <div
+      class="border border-line rounded-lg overflow-hidden w-full"
+    >
+      <div class="flex items-center justify-between w-full p-5">
+        <span class="text-xl font-black">
+          Salary Overview
+        </span>
       </div>
 
       <table class="w-full text-left">
-        <thead class="text-xs text-slate-500 uppercase border-b border-slate-100">
-           <tr>
-            <th class="pb-3">Employee</th>
-            <th class="pb-3">Department</th>
-            <th class="pb-3 text-blue-600">Net Salary</th>
-            <th class="pb-3">OT Hours</th>
+        <thead
+          class="bg-gray-100 text-gray-400"
+        >
+          <tr>
+            <td class="px-6 py-5">Employee</td>
+            <td class="px-6 py-5">Department</td>
+            <td class="px-6 py-5">Net Salary</td>
+            <td class="px-6 py-5">OT Hours</td>
           </tr>
         </thead>
-        <tbody class="text-sm">
-          <tr class="border-b border-slate-50">
-            <td class="py-3 font-medium">Emily Davis</td>
-            <td class="py-3 text-slate-600">IT Support</td>
-            <td class="py-3 text-blue-600 font-bold">$4,456</td>
-            <td class="py-3 text-slate-600">6h</td>
+        <tbody>
+          <tr class="border-t border-line">
+            <td class="px-6 py-5">Emily Davis</td>
+            <td class="px-6 py-5">IT Support</td>
+            <td class="px-6 py-5">$4,456</td>
+            <td class="px-6 py-5">6h</td>
           </tr>
-          <tr class="border-b border-slate-50">
-            <td class="py-3 font-medium"> David Miller</td>
-            <td class="py-3 text-slate-600">Finance</td>
-            <td class="py-3 text-blue-600 font-bold">$3,136</td>
-            <td class="py-3 text-slate-600">5h</td>
+          <tr class="border-t border-line">
+            <td class="px-6 py-5">David Miller</td>
+            <td class="px-6 py-5">Finance</td>
+            <td class="px-6 py-5">$3,136</td>
+            <td class="px-6 py-5">5h</td>
           </tr>
-          <tr class="border-b border-slate-50">
-            <td class="py-3 font-medium"> Sarah Williams</td>
-            <td class="py-3 text-slate-600">Sales</td>
-            <td class="py-3 text-blue-600 font-bold">$3,456</td>
-            <td class="py-3 text-slate-600">4h</td>
+          <tr class="border-t border-line">
+            <td class="px-6 py-5">Sarah Williams</td>
+            <td class="px-6 py-5">Sales</td>
+            <td class="px-6 py-5">$3,456</td>
+            <td class="px-6 py-5">4h</td>
           </tr>
-          <tr class="border-b border-slate-50">
-            <td class="py-3 font-medium">ECarol White</td>
-            <td class="py-3 text-slate-600">Human Resources</td>
-            <td class="py-3 text-blue-600 font-bold">$3,456</td>
-            <td class="py-3 text-slate-600">2h</td>
+          <tr class="border-t border-line">
+            <td class="px-6 py-5">ECarol White</td>
+            <td class="px-6 py-5">Human Resources</td>
+            <td class="px-6 py-5">$3,456</td>
+            <td class="px-6 py-5">2h</td>
           </tr>
-          </tbody>
+        </tbody>
       </table>
     </div>
-
   </div>
-   </div>
-  </div>
-
 </template>
