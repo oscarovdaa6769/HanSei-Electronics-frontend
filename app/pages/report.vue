@@ -42,7 +42,7 @@
     <td class="py-3 text-slate-600">2026-03-12</td>
     <td class="py-3 font-medium">Sarah Williams</td>
     <td class="py-3">
-      <span class="bg-emerald-100 text-emerald-700 px-3 py-1 text-xs font-medium rounded-full">
+      <span class="bg-emerald-100 text-emerald-700 px-3 py-1 w-94 font-medium rounded-full">
         Present
       </span>
     </td>
@@ -51,7 +51,7 @@
     <td class="py-3 text-slate-600">2026-03-12</td>
     <td class="py-3 font-medium">David Miller</td>
     <td class="py-3">
-      <span class="bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium rounded-full">
+      <span class="bg-orange-100 text-orange-700 px-3 py-1  w-94  font-medium rounded-full">
         On Leave
       </span>
     </td>
@@ -60,7 +60,7 @@
     <td class="py-3 text-slate-600">2026-03-12</td>
     <td class="py-3 font-medium">Emma Davis</td>
     <td class="py-3">
-      <span class="bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium rounded-full">
+      <span class="bg-orange-100 text-orange-700 px-3 py-1 w-94 font-medium rounded-full">
         On Leave
       </span>
     </td>
@@ -85,17 +85,17 @@
             <tr class="border-b border-slate-50">
               <td class="py-3 font-medium">Emma Davis</td>
               <td class="py-3 text-slate-600">Annual Leave</td>
-              <td class="py-3"><span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-medium">Approved</span></td>
+              <td class="py-3"><span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full w-94 font-medium">Approved</span></td>
             </tr>
             <tr class="border-b border-slate-50">
               <td class="py-3 font-medium">Carol White</td>
               <td class="py-3 text-slate-600">Sick Leave</td>
-              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">Pending</span></td>
+              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full w-94 font-medium">Pending</span></td>
             </tr>
             <tr class="border-b border-slate-50">
               <td class="py-3 font-medium">David Miller</td>
               <td class="py-3 text-slate-600">Sick Leave</td>
-              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">Pending</span></td>
+              <td class="py-3"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full w-94 font-medium">Pending</span></td>
             </tr>
           </tbody>
       </table>
@@ -124,8 +124,8 @@
         <tbody class="text-sm">
           <tr class="border-b border-slate-50">
             <td class="py-3 font-medium">Emily Davis</td>
-            <td class="py-3 text-slate-600">IT Support</td>
-            <td class="py-3 text-blue-600 font-bold">$4,456</td>
+            <td class="py-3 text-slate-600">HR</td>
+            <td class="py-3 text-blue-600 font-bold">$3,456</td>
             <td class="py-3 text-slate-600">6h</td>
           </tr>
           <tr class="border-b border-slate-50">
