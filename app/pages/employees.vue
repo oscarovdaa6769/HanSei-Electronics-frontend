@@ -1,3 +1,80 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import {onMounted } from 'vue';
+import secondBtn from '~/components/secondBtn.vue';
+import employeeMiniDashboard from '~/components/employeeMiniDashboard.vue';
+
+const isModalOpen = ref(false);
+const currentTime =ref('');
+
+const newEmp = ref({ name: '', department: '', position: '' });
+
+// const saveEmployee = () => {
+//   const lastIdNum = employees.value.length > 0
+//     ? parseInt (employees.value[employees.value.length - 1].id.substring(1))
+//     : 0
+//   const nextId = `E${String(lastIdNum + 1).padStart(3, '0')}`
+
+//   employees.value.push({
+//     id: nextId,
+//     ...newEmp.value,
+//     status: 'Active'
+//   })
+
+//   newEmp.value = { name: '', department: '', position: ''}
+//   isModalOpen.value = false
+// }
+
+onMounted(() => {
+  const update = () => { currentTime.value = new Date().toLocaleTimeString('en-GB');};
+  update()
+  setInterval(update, 1000)
+})
+
+const search = ref('')
+
+const config = useRuntimeConfig()
+const page = ref(1)
+
+const { data: employees, refresh: refreshList } = useFetch(`${config.public.apiBase}/employee`, {
+  query: computed(() => ({
+    page: page.value
+  }))
+})
+
+const { data: employeesMiniDashboard, refresh: refreshMiniDashboard, pending, error } = useFetch(
+  `${config.public.apiBase}/employeeminidashboard`
+)
+
+watch(page, () => {
+  refreshList()
+})
+
+function nextPage() {
+  if (page.value < employees.value?.last_page) {
+    page.value++
+  }
+}
+
+function prevPage() {
+  if (page.value > 1) {
+    page.value--
+  }
+}
+
+function statusClass(status: string) {
+  if (status.toLowerCase() === 'active') return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+  else return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'
+}
+
+function actionClass(action: string) {
+  if (action.toLowerCase() === 'edit') return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg cursor-pointer'
+  else return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg cursor-pointer'
+}
+
+const retry = () => refreshMiniDashboard()
+</script>
+
 <template>
   <div class="p-10 w-full flex flex-col gap-9">
     <div class="flex justify-between items-center">
@@ -18,10 +95,12 @@
       </div>
     </div>
     <div class="grid grid-cols-4 gap-6">
-      <card label="Total Employees" icon="solar:users-group-rounded-bold" :amount="156" iicon="solar:arrow-up-linear" message="8 new this month" note="text-gray-400" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
-      <card label="Active" icon="solar:user-check-bold" :amount="148" iicon="" message="94.8% of total" note="text-gray-400" color="bg-green-500/20 backdrop-blur-md text-success"/>
-      <card label="On leave" icon="solar:clock-circle-bold" :amount="8" iicon="" message="5 approved, 3 pending" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
-      <card label="Departments" icon="solar:buildings-bold" :amount="6" iicon="" message="Production largest" note="text-gray-400" color="bg-purple-500/20 backdrop-blue-md text-purple-500"/>
+      <employeeMiniDashboard
+        :employees="employeesMiniDashboard"
+        :pending="pending"
+        :error="error"
+        @retry="retry"
+      />
     </div>
     <div class="border border-line rounded-lg overflow-hidden">
       <div class="flex items-center justify-between w-full p-5">
@@ -36,34 +115,35 @@
           <thead class="bg-gray-100 text-gray-400">
             <tr>
               <td class="px-6 py-5">ID</td>
-              <td class="px-6 py-5">Employee</td>
-              <td class="px-6 py-5">Department</td>
+              <td class="w-2/12 px-6 py-5">Employee</td>
+              <td class="w-2/12 px-6 py-5">Department</td>
               <td class="px-6 py-5">Position</td>
               <td class="px-6 py-5">Status</td>
               <td class="px-6 py-5">Action</td>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="emp in filteredEmployees" :key="emp.id" class="border-t border-line">
-              <td class="py-5 px-6">{{ emp.id }}</td>
-              <td class="py-5 px-6">{{ emp.name }}</td>
-              <td class="py-5 px-6">{{ emp.department }}</td>
-              <td class="py-5 px-6">{{ emp.position }}</td>
+            <tr v-for="item in employees?.data" :key="item.id" class="border-t border-line">
+              <td class="py-5 px-6">{{ item.id }}</td>
+              <td class="py-5 px-6">{{ item.employee_name }}</td>
+              <td class="py-5 px-6">{{ item.department }}</td>
+              <td class="py-5 px-6">{{ item.position }}</td>
               <td class="py-5 px-6">
-                <span
-                  :class="emp.status === 'Active'
-                    ? 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
-                    : 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'"
-                >
-                  {{ emp.status }}
+                <span :class="statusClass(item.status)">
+                  {{ item.status }}
                 </span>
               </td>
               <td class="py-5 px-6">
-                <span @click="removeEmployee(emp.id)" class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg cursor-pointer">Remove</span>
+                <button :class="actionClass(item.action)">{{ item.action }}</button>
               </td>
             </tr>
           </tbody>
         </table>
+        <div class="flex items-center justify-between p-4 border-t border-line">
+          <thirdBtn label="Previous" @click="prevPage" :disabled="page === 1"/>
+          <span class="text-gray-400">Page {{ employees?.current_page }} of {{ employees?.last_page }}</span>
+          <thirdBtn label="Next" @click="nextPage" :disabled="page === employees?.last_page"/>
+        </div>
       </div>
     </div>
 
@@ -97,87 +177,3 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
-import {onMounted } from 'vue';
-import secondBtn from '/components/secondBtn.vue';
-
-const isModalOpen = ref(false);
-const currentTime =ref('');
-
-const employees = ref([
-  {id: 'E001',
-  name: 'Sambart',
-  department: 'Engineering',
-  position: 'Lead Developer',
-  status: 'Active'
-},
-
-  {id: 'E002',
-  name: 'Bana',
-  department: 'HR',
-  position:'HR Manager',
-  status: 'Active'
-},
-
-  {id: 'E003',
-  name: 'Hana',
-  department: 'Finance',
-  position: 'Accountant',
-  status: 'Active'
-},
-
-  {id: 'E004',
-  name: 'Nona',
-  department: 'Sales',
-  position: 'Sale Rep',
-  status:'Active'
-},
-
-  {id: 'E005',
-  name: 'Danhel',
-  department: 'Operations',
-  position: 'Coordinator',
-  status:'Active'
-},
-])
-
-const newEmp = ref({ name: '', department: '', position: '' });
-
-const saveEmployee = () => {
-  const lastIdNum = employees.value.length > 0
-  ? parseInt (employees.value[employees.value.length - 1].id.substring(1))
-  :0;
-  const nextId = `E${String(lastIdNum + 1).padStart(3, '0')}`;
-
-  employees.value.push({
-    id: nextId,
-    ...newEmp.value,
-    status: 'Active'
-  });
-
-  newEmp.value = { name: '', department: '', position: ''};
-  isModalOpen.value = false;
-};
-
- const removeEmployee = (id) => {
-  employees.value = employees.value.filter(emp => emp.id !== id);
- };
-
- onMounted(() => {
-  const update = () => { currentTime.value = new Date().toLocaleTimeString('en-GB');};
-  update();
-  setInterval(update, 1000);
- });
-
-const search = ref('')
-
-const filteredEmployees = computed(() => {
-  return employees.value.filter(emp =>
-    emp.name.toLowerCase().includes(search.value.toLowerCase()) ||
-    emp.department.toLowerCase().includes(search.value.toLowerCase()) ||
-    emp.position.toLowerCase().includes(search.value.toLowerCase()) ||
-    emp.id.toLowerCase().includes(search.value.toLowerCase())
-  )
-})
-</script>

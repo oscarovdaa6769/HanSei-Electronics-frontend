@@ -6,6 +6,7 @@ import card2Btn1 from '/components/card2Btn1.vue'
 import card2Btn2 from '/components/card2Btn2.vue'
 import available from '/components/available.vue'
 import { ref } from 'vue'
+import leaveRequest from '~/components/leaveRequestCard.vue'
 
 const activeDropdown = ref(null)
 
@@ -93,6 +94,69 @@ function selectDate(day) {
   selectedDate.value = `${year.value}-${month.value + 1}-${day}`
   showCalendar.value = false
 }
+
+const config = useRuntimeConfig()
+const page = ref(1)
+const { data: leaveRequests, refresh } = await useFetch(`${config.public.apiBase}/leave_requests`,
+  {
+    query: computed(() => ({
+      page: page.value
+    }))
+  }
+)
+
+function formatDate(dateString: string) {
+  return new Date(dateString)
+    .toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: '2-digit'
+    })
+    .replace(/ /g, '/')
+}
+
+function statusClass(status) {
+  switch (status) {
+    case 'Pending':
+      return 'bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg'
+    case 'Approved':
+    case 'Edit':
+      return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+    case 'Rejected':
+    case 'Delete':
+      return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'
+    default:
+      return ''
+  }
+}
+function actionClass(action) {
+  switch (action) {
+    case 'View':
+      return 'bg-blue-500/20 backdrop-blur-md text-primary px-4 py-2 rounded-lg'
+    case 'Edit':
+      return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+    case 'Delete':
+      return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'
+    default:
+      return ''
+  }
+}
+
+watch(page, () => {
+  refresh()
+})
+
+function nextPage() {
+  if (page.value < leaveRequests.value?.last_page) {
+    page.value++
+  }
+}
+
+function prevPage() {
+  if (page.value > 1) {
+    page.value--
+  }
+}
 </script>
 
 <template>
@@ -178,38 +242,10 @@ function selectDate(day) {
     </div>
     <div class="flex flex-col gap-3">
       <div class="grid grid-cols-3 gap-3">
-        <card2 shortName="BS" fullName="Bona Sovena" dep="Finance" id="PR-023" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 25, 2026" date2="Mar 30, 2026" period="5 Days" graph="Family vacation to Jeju Island. Need time off for travel and rest." status2="Requested: Mar 10, 2026">
-          <template #actions>
-            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
-          </template>
-        </card2>
-        <card2 shortName="DO" fullName="Det Oudomveasna" dep="IT" id="QC-015" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 18, 2026" date2="Mar 20, 2026" period="3 Days" graph="Doctor's appointment and recovery from flu symptoms. Will provide medical certificate." status2="Requested: Mar 15, 2026">
-          <template #actions>
-            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
-          </template>
-        </card2>
-        <card2 shortName="TS" fullName="Thea Sithul" dep="IT" id="WH-008" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Personal Leave" icon="solar:user-bold" color2="bg-blue-500/20 backdrop-blur-md text-primary" date="Mar 22, 2026" date2="Mar 23, 2026" period="2 Days" graph="Personal family matters. Need to attend to urgent family situation." status2="Approved by: HR Manager">
-          <template #actions>
-            <card2Btn1 icon="solar:eye-bold"/>
-          </template>
-        </card2>
-      </div>
-      <div class="grid grid-cols-3 gap-3">
-        <card2 shortName="CR" fullName="Cristiano Ronaldo" dep="Human Resource" id="MT-012" status="Rejected" color="backdrop-blur-md bg-red-500/20 text-danger" type="Annual Leave" icon="solar:calendar-mark-bold" color2="bg-yellow-500/20 backdrop-blur-md text-warning" date="Mar 10, 2026" date2="Mar 17, 2026" period="7 Days" graph="Planned overseas vacation. Already purchased tickets." status2="Rejected: Mar 12, 2026">
-          <template #actions>
-            <card2Btn1 icon="solar:eye-bold"/>
-          </template>
-        </card2>
-        <card2 shortName="LM" fullName="Lionel Messi" dep="Marketing" id="PR-031" status="Pending" color="backdrop-blur-md bg-yellow-500/20 text-warning" type="Maternity Leave" icon="tabler:baby-carriage-filled" color2="bg-green-500/20 backdrop-blur-md text-success" date="Apr 1, 2026" date2="Jul 1, 2026" period="90 Days" graph="Maternity leave. Due date is March 25, 2026. Medical certificate attached." status2="Requested: Mar 5, 2026">
-          <template #actions>
-            <card2Btn2 icon1="solar:check-circle-bold" icon2="solar:close-circle-bold"/>
-          </template>
-        </card2>
-        <card2 shortName="NJ" fullName="Neymar Jr" dep="Finance" id="IT-005" status="Approved" color="backdrop-blur-md bg-green-500/20 text-success" type="Sick Leave" icon="solar:stethoscope-bold" color2="bg-red-500/20 backdrop-blur-md text-danger" date="Mar 14, 2026" date2="Mar 16, 2026" period="3 Days" graph="Dental surgery recovery. Cannot work due to pain and medication." status2="Approved by: HR Manager">
-          <template #actions>
-            <card2Btn1 icon="solar:eye-bold"/>
-          </template>
-        </card2>
+        <leaveRequest
+          v-for="request in leaveRequests" :key="request.id"
+          :leaveRequests="request"
+        />
       </div>
     </div>
     <div class="border border-line rounded-lg overflow-hidden">
@@ -221,69 +257,29 @@ function selectDate(day) {
         <table class="w-full text-left">
           <thead class="bg-gray-100 text-gray-400">
             <tr>
-              <td class="px-6 py-5">Employee</td>
-              <td class="px-6 py-5">Department</td>
+              <td class="px-6 py-5">ID</td>
+              <td class="w-2/12 px-6 py-5">Employee</td>
               <td class="px-6 py-5">Leave Type</td>
               <td class="px-6 py-5">Period</td>
-              <td class="px-6 py-5">Days</td>
               <td class="px-6 py-5">Status</td>
-              <td class="px-6 py-5">Requested</td>
               <td class="px-6 py-5">Action</td>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">Bona Sovena</td>
-              <td class="px-6 py-5">Finance</td>
-              <td class="px-6 py-5">Annual Leave</td>
-              <td class="px-6 py-5">Mar 25-30, 2026</td>
-              <td class="px-6 py-5">5</td>
-              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span></td>
-              <td class="px-6 py-5">Mar 10, 2025</td>
-              <td class="px-6 py-5"><Icon name="solar:check-circle-bold" class="cursor-pointer bg-green-500/50 backdrop-blur-md hover:bg-success" size="20"/><Icon name="solar:close-circle-bold" class="cursor-pointer bg-red-500/50 backdrop-blur-md hover:bg-danger" size="20"/></td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">Det Oudomveasna</td>
-              <td class="px-6 py-5">IT</td>
-              <td class="px-6 py-5">Sick Leave</td>
-              <td class="px-6 py-5">Mar 18-20, 2026</td>
-              <td class="px-6 py-5">3</td>
-              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Pending</span></td>
-              <td class="px-6 py-5">Mar 15, 2025</td>
-              <td class="px-6 py-5"><Icon name="solar:check-circle-bold" class="cursor-pointer bg-green-500/50 backdrop-blur-md hover:bg-success" size="20"/><Icon name="solar:close-circle-bold" class="cursor-pointer bg-red-500/50 backdrop-blur-md hover:bg-danger" size="20"/></td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">Thea Sithul</td>
-              <td class="px-6 py-5">IT</td>
-              <td class="px-6 py-5">Personal Leave</td>
-              <td class="px-6 py-5">Mar 22-23, 2026</td>
-              <td class="px-6 py-5">2</td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approved</span></td>
-              <td class="px-6 py-5">Mar 12, 2025</td>
-              <td class="px-6 py-5"><Icon name="solar:eye-bold" class="cursor-pointer bg-blue-500/50 backdrop-blur-md hover:bg-primary" size="20"/></td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">Cristiano Ronaldo</td>
-              <td class="px-6 py-5">Human Resource</td>
-              <td class="px-6 py-5">Annual Leave</td>
-              <td class="px-6 py-5">Mar 10-17, 2026</td>
-              <td class="px-6 py-5">7</td>
-              <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Rejected</span></td>
-              <td class="px-6 py-5">Mar 5, 2025</td>
-              <td class="px-6 py-5"><Icon name="solar:eye-bold" class="cursor-pointer bg-blue-500/50 backdrop-blur-md hover:bg-primary" size="20"/></td>
+            <tr v-for="request in leaveRequests?.data" :key="request.id" class="border-t border-line">
+              <td class="px-6 py-5">{{ request.id }}</td>
+              <td class="px-6 py-5">{{ request.employee_name }}</td>
+              <td class="px-6 py-5">{{ request.leave_type }}</td>
+              <td class="px-6 py-5">{{ formatDate(request.start_date) }} - {{ formatDate(request.end_date) }}</td>
+              <td class="px-6 py-5"><span :class="statusClass(request.status)">{{ request.status }}</span></td>
+              <td class="px-6 py-5"><span :class="actionClass(request.action)">{{ request.action }}</span></td>
             </tr>
           </tbody>
         </table>
         <div class="flex items-center justify-between p-4 border-t border-line">
-          <thirdBtn label="Previous"/>
-          <span class="text-gray-400">Page 1 of 3</span>
-          <thirdBtn label="Next"/>
+          <thirdBtn label="Previous" @click="prevPage" :disabled="page === 1"/>
+          <span class="text-gray-400">Page {{ leaveRequests?.current_page }} of {{ leaveRequests?.last_page }}</span>
+          <thirdBtn label="Next" @click="nextPage" :disabled="page === leaveRequests?.last_page"/>
         </div>
       </div>
     </div>

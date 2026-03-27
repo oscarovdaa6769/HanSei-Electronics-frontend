@@ -3,6 +3,7 @@ import secondBtn from '/components/secondBtn.vue'
 import thirdBtn from '/components/thirdBtn.vue'
 import card from '/components/card.vue'
 import { ref, computed } from 'vue'
+import dayjs from 'dayjs'
 
 const activeDropdown = ref(null)
 
@@ -120,6 +121,49 @@ function prevDay() {
 function selectDate(day) {
   selectedDate.value = `${year.value}-${month.value + 1}-${day}`
   showCalendar.value = false
+}
+
+const config = useRuntimeConfig()
+const page = ref(1)
+
+const { data: attendances, refresh } = await useFetch(`${config.public.apiBase}/attendance`,
+  {
+    query: computed(() => ({
+      page: page.value
+    }))
+  }
+)
+
+watch(page, () => {
+  refresh()
+})
+
+function nextPage() {
+  if (page.value < attendances.value?.last_page) {
+    page.value++
+  }
+}
+
+function prevPage() {
+  if (page.value > 1) {
+    page.value--
+  }
+}
+
+function statusClass(status: string) {
+  if (status === 'Present') return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+  if (status === 'Late') return 'bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg'
+  if (status === 'Absent') return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'
+  return ''
+}
+
+function typeClass(type: string) {
+  if (type.toLowerCase() === 'full time') return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+  else return 'bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg'
+}
+
+function formatTime(time: string) {
+  return dayjs(`1970-01-01T${time}`).format('h:mm A')
 }
 </script>
 
@@ -241,68 +285,32 @@ function selectDate(day) {
           <thead class="bg-gray-100 text-gray-400">
             <tr>
               <td class="px-6 py-5">ID</td>
-              <td class="px-6 py-5">Employee</td>
-              <td class="px-6 py-5">Department</td>
-              <td class="px-6 py-5">Employment type</td>
+              <td class="w-2/12 px-6 py-5">Employee</td>
+              <td class="w-2/12 px-6 py-5">Department</td>
+              <td class="px-6 py-5">Time Status</td>
               <td class="px-6 py-5">Status</td>
               <td class="px-6 py-5">Check In</td>
               <td class="px-6 py-5">Check Out</td>
-              <td class="px-6 py-5">Over time</td>
+              <td class="px-6 py-5">Over Time</td>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">1</td>
-              <td class="px-6 py-5">Bona Sovena</td>
-              <td class="px-6 py-5">Finance</td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Full time</span></td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Present</span></td>
-              <td class="px-6 py-5">09:00 AM</td>
-              <td class="px-6 py-5">05:00 PM</td>
-              <td class="px-6 py-5">0h</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">2</td>
-              <td class="px-6 py-5">Det Oudomveasna</td>
-              <td class="px-6 py-5">IT</td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Full time</span></td>
-              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Late</span></td>
-              <td class="px-6 py-5">09:00 AM</td>
-              <td class="px-6 py-5">05:00 PM</td>
-              <td class="px-6 py-5">0h</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">3</td>
-              <td class="px-6 py-5">Thea Sithul</td>
-              <td class="px-6 py-5">Human Resource</td>
-              <td class="px-6 py-5"><span class="bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg">Part time</span></td>
-              <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Absent</span></td>
-              <td class="px-6 py-5">-</td>
-              <td class="px-6 py-5">-</td>
-              <td class="px-6 py-5">0h</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr class="border-t border-line">
-              <td class="px-6 py-5">4</td>
-              <td class="px-6 py-5">Rin Vannara</td>
-              <td class="px-6 py-5">Marketing</td>
-              <td class="px-6 py-5"><span class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Full time</span></td>
-              <td class="px-6 py-5"><span class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Absent</span></td>
-              <td class="px-6 py-5">-</td>
-              <td class="px-6 py-5">-</td>
-              <td class="px-6 py-5">0h</td>
+            <tr v-for="item in attendances?.data" :key="item.id" class="border-t border-line">
+              <td class="px-6 py-5">{{ item.id }}</td>
+              <td class="px-6 py-5">{{ item.employee_name }}</td>
+              <td class="px-6 py-5">{{ item.department }}</td>
+              <td class="px-6 py-5"><span :class="typeClass(item.type)">{{ item.type }}</span></td>
+              <td class="px-6 py-5"><span :class="statusClass(item.status)">{{ item.status }}</span></td>
+              <td class="px-6 py-5">{{ formatTime(item.check_in) }}</td>
+              <td class="px-6 py-5">{{ formatTime(item.check_out) }}</td>
+              <td class="px-6 py-5">{{ item.over_time ? item.over_time + 'h' : '-' }}</td>
             </tr>
           </tbody>
         </table>
         <div class="flex items-center justify-between p-4 border-t border-line">
-          <thirdBtn label="Previous"/>
-          <span class="text-gray-400">Page 1 of 3</span>
-          <thirdBtn label="Next"/>
+          <thirdBtn label="Previous" @click="prevPage" :disabled="page === 1"/>
+          <span class="text-gray-400">Page {{ attendances?.current_page }} of {{ attendances?.last_page }}</span>
+          <thirdBtn label="Next" @click="nextPage" :disabled="page === attendances?.last_page"/>
         </div>
       </div>
     </div>

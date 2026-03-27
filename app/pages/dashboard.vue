@@ -1,3 +1,35 @@
+<script setup>
+import dashboardMiniDashboard from '~/components/dashboardMiniDashboard.vue';
+import boxRecentAttendance from '~/components/boxRecentAttendance.vue';
+import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
+
+// const currentTime = ref('');
+// let clockInterval = null;
+
+// const updateClock = () => {
+//   currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false });
+// };
+
+// onMounted(() => {
+//   updateClock();
+//   clockInterval = setInterval(updateClock, 1000);
+// });
+
+// onUnmounted(() => {
+//   clearInterval(clockInterval);
+// });
+const config = useRuntimeConfig()
+const page = ref(1)
+
+const { data: dashboardData, pending, error, refresh } = await useFetch(`${config.public.apiBase}/dashboard`,
+  {
+    query: computed(() => ({
+      page: page.value
+    }))
+  }
+)
+</script>
+
 <template>
   <div class="p-10 w-full flex flex-col gap-9">
     <div class="flex justify-between items-center">
@@ -17,10 +49,12 @@
       </div>
     </div>
     <div class="grid grid-cols-4 gap-6">
-      <card label="Total Employees" icon="solar:users-group-rounded-bold" :amount="156" iicon="solar:arrow-up-linear" message="+12 this month" note="text-success" color="bg-blue-500/20 backdrop-blur-md text-primary"/>
-      <card label="Present Today" icon="solar:user-check-bold" :amount="142" iicon="solar:arrow-up-linear" message="91% attendance" note="text-success" color="bg-green-500/20 backdrop-blur-md text-success"/>
-      <card label="On Leave" icon="solar:calendar-mark-bold" :amount="8" iicon="" message="4 pending requests" note="text-gray-400" color="bg-yellow-500/20 backdrop-blur-md text-warning"/>
-      <card label="Late Today" icon="solar:clock-circle-bold" :amount="6" iicon="solar:arrow-down-linear" message="-2 from yesterday" note="text-danger" color="bg-red-500/20 backdrop-blue-md text-danger"/>
+      <dashboardMiniDashboard
+        :dashboard="dashboardData"
+        :pending="pending"
+        :error="error"
+        @retry="refresh"
+      />
     </div>
     <div class="flex items-start gap-6">
       <boxRecentAttendance />
@@ -28,29 +62,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import card from '/components/card.vue'
-
-// Fix: Remove duplicate imports, keep only one of each
-import CardDashboard from '/components/cardDashboard.vue';
-import boxRecentAttendance from '~/components/boxRecentAttendance.vue';
-import BoxLeaveRequests from '~/components/boxLeaveRequests.vue';
-
-const currentTime = ref('');
-let clockInterval = null;
-
-const updateClock = () => {
-  currentTime.value = new Date().toLocaleTimeString('en-US', { hour12: false });
-};
-
-onMounted(() => {
-  updateClock();
-  clockInterval = setInterval(updateClock, 1000);
-});
-
-onUnmounted(() => {
-  clearInterval(clockInterval);
-});
-</script>
