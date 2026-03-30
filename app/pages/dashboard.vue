@@ -40,7 +40,7 @@ const { data: dashboardData, pending, error, refresh } = await useFetch(`${confi
       <div class="flex items-center justify-end gap-3 w-full">
         <form class="relative w-full max-w-sm">
           <Icon name="solar:magnifer-linear" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"/>
-          <input type="text" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
+          <input type="text" v-model="search" placeholder="Search employees..." class="w-full pl-10 pr-4 py-2 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"/>
         </form>
         <div class="relative">
           <Icon name="solar:bell-bold" size="20"/>

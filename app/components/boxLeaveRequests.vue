@@ -1,3 +1,14 @@
+<script setup lang="ts">
+const config = useRuntimeConfig()
+const { data: leaveRequests } = await useFetch(`${config.public.apiBase}/leave_requests`)
+
+const statusClass = (status: string) => {
+  if (status === 'Approved') return 'bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg'
+  if (status === 'Rejected') return 'bg-yellow-500/20 backdrop-blur-md text-warning px-4 py-2 rounded-lg'
+  return 'bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg'
+}
+</script>
+
 <template>
   <div class="border border-line rounded-lg overflow-hidden w-full">
     <div class="flex items-center justify-between w-full p-5">
@@ -8,31 +19,22 @@
         <thead class="bg-gray-100 text-gray-400">
           <tr>
             <td class="px-6 py-5">Employee</td>
-            <td class="px-6 py-5">Dates</td>
-            <td class="px-6 py-5">Action</td>
+            <td class="px-6 py-5">Leave Type</td>
+            <td class="px-6 py-5">Status</td>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(leave) in leaveRequests" :key="leave.name" class="border-t border-line">
-            <td class="px-6 py-5">{{ leave.name }}</td>
-            <td class="px-6 py-5">{{ leave.dates }}</td>
-            <td class="py-2 flex gap-2">
-              <button class="bg-green-500/20 backdrop-blur-md text-success px-4 py-2 rounded-lg">Approve</button>
-              <button class="bg-red-500/20 backdrop-blur-md text-danger px-4 py-2 rounded-lg">Reject</button>
+          <tr v-for="item in leaveRequests?.data" :key="item.id" class="border-t border-line">
+            <td class="px-6 py-5">{{ item.employee_name }}</td>
+            <td class="px-6 py-5">{{ item.leave_type }}</td>
+            <td class="px-6 py-5">
+              <span :class="statusClass(item.status)">
+                {{ item.status }}
+              </span>
             </td>
-          </tr>
-          <tr v-if="leaveRequests.length === 0">
-            <td colspan="3" class="py-4 text-center text-gray-400">No pending requests</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
-<script setup>
-const leaveRequests = [
-  { name: 'Emma Davis', dates: 'Mar 12–14' },
-  { name: 'Bob Smith',  dates: 'Mar 20–21' },
-]
-
-</script>

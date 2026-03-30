@@ -6,7 +6,7 @@ import card2Btn1 from '/components/card2Btn1.vue'
 import card2Btn2 from '/components/card2Btn2.vue'
 import available from '/components/available.vue'
 import { ref } from 'vue'
-import leaveRequest from '~/components/leaveRequestCard.vue'
+import leaveRequestCard from '~/components/leaveRequestCard.vue'
 
 const activeDropdown = ref(null)
 
@@ -104,6 +104,10 @@ const { data: leaveRequests, refresh } = await useFetch(`${config.public.apiBase
     }))
   }
 )
+
+const { data: leaveRequestsCard, refresh: refreshCard, pending, error } = useFetch(`${config.public.apiBase}/leaverequestcard`)
+
+const retry = () => refreshCard
 
 function formatDate(dateString: string) {
   return new Date(dateString)
@@ -242,9 +246,11 @@ function prevPage() {
     </div>
     <div class="flex flex-col gap-3">
       <div class="grid grid-cols-3 gap-3">
-        <leaveRequest
-          v-for="request in leaveRequests" :key="request.id"
-          :leaveRequests="request"
+        <leaveRequestCard
+          :leaveRequests="leaveRequestsCard"
+          :pending="pending"
+          :error="error"
+          @retry="retry"
         />
       </div>
     </div>

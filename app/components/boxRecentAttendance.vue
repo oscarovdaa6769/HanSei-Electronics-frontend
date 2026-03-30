@@ -23,16 +23,14 @@ function formatTime(time: string) {
     <div class="overflow-x-auto bg-white">
       <table class="w-full text-left">
         <thead class="bg-gray-100 text-gray-400">
-          <tr class="text-sm">
-            <td class="px-6 py-5">ID</td>
+          <tr>
             <td class="px-6 py-5">Employee</td>
             <td class="px-6 py-5">Check-in</td>
             <td class="px-6 py-5">Status</td>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in attendance?.data" :key="item.id" class="border-t border-line text-xs">
-            <td class="px-6 py-5">{{ item.id }}</td>
+          <tr v-for="item in attendance?.data" :key="item.id" class="border-t border-line">
             <td class="px-6 py-5">{{ item.employee_name }}</td>
             <td class="px-6 py-5">{{ formatTime(item.check_in) }}</td>
             <td class="px-6 py-5">
